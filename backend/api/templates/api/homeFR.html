@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Platforma Transportation</title>
+  <!-- Підключення Bootstrap (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  >
+  <!-- Ваші додаткові стилі (за потреби) -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .navbar-brand {
+      font-weight: 600;
+    }
+    /* Приклад додаткового стилю для "Available Cargo" */
+    .cargo-table thead {
+      background-color: #f1f1f1;
+    }
+    .footer-links a {
+      color: #6c757d;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Верхня навігація -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand" href="#">Platforma | <span class="text-primary"> Transportation</span></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <!-- Можливий перемикач мов -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="languageDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+            Français
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" href="home.html">English</a></li>
+              <li><a class="dropdown-item" href="#">Allemand</a></li>
+              <li><a class="dropdown-item" href="#">Italien</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white px-3 ms-2" href="{% url 'registration' %}">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Меню послуг (другий рядок навігації) -->
+  <div class="bg-light border-bottom">
+    <div class="container">
+      <ul class="nav nav-pills py-2">
+        <li class="nav-item me-3">
+          <a class="nav-link active" href="#">Domestic Cargo</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link" href="#">Need Carriers?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-success text-white px-3" href="#">Add Cargo Now</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Основний контент -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Список доступних перевезень (Available Cargo) -->
+      <div class="col-lg-8">
+        <h4 class="mb-4">Available Cargo</h4>
+        <table class="table table-hover cargo-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Origin - Destination</th>
+              <th>Cargo</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>18.03.2024 09:00</td>
+              <td>Zurich → Bern</td>
+              <td>Post &amp; Bags</td>
+              <td>Fragile</td>
+            </tr>
+            <tr>
+              <td>19.03.2024 12:00</td>
+              <td>Geneva → Sion</td>
+              <td>Goods on Pallets</td>
+              <td>Time-critical</td>
+            </tr>
+            <tr>
+              <td>20.03.2024 08:30</td>
+              <td>Lugano → Chur</td>
+              <td>Equipment</td>
+              <td>Heavy load</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Бокова панель (Need Carriers?, Currency Exchange, Search Cargo) -->
+      <div class="col-lg-4">
+        <!-- Блок "Need carriers?" -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Need carriers?</h5>
+            <p class="card-text">
+              Get a list of verified carriers and make your shipment easier!
+            </p>
+            <a href="#" class="btn btn-primary">Add cargo now</a>
+          </div>
+        </div>
+
+        <!-- Блок "Search Available Cargo" -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Search Available Cargo</h5>
+            <form>
+              <div class="mb-3">
+                <label for="region" class="form-label">Region</label>
+                <select class="form-select" id="region">
+                  <option>All regions</option>
+                  <option>Zurich</option>
+                  <option>Bern</option>
+                  <option>Geneva</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="cargoType" class="form-label">Cargo Type</label>
+                <select class="form-select" id="cargoType">
+                  <option>All cargo types</option>
+                  <option>Equipment</option>
+                  <option>Documents</option>
+                  <option>Food</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="shipper" class="form-label">Shipper</label>
+                <select class="form-select" id="shipper">
+                  <option>All shippers</option>
+                  <option>Company A</option>
+                  <option>Company B</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Search Cargo</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-top py-4 mt-5">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
+      <div>
+        <p class="mb-0 text-muted">
+          © 2023 Platforma Transportation. The top transportation platform in Swiss.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Services</a>
+        <a href="#">Support</a>
+        <a href="#">Contacts</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Підключення Bootstrap JS (якщо потрібно для випадаючих меню) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
