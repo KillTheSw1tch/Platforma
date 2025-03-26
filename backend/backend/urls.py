@@ -21,5 +21,5 @@ urlpatterns = [
     path('registration/', TemplateView.as_view(template_name='api/registrationCarrier.html'), name='registration'),
     path('login/', TemplateView.as_view(template_name='api/login.html'), name='login'),
     #path('add-cargo/', TemplateView.as_view(template_name='api/add_cargo.html'), name='add_cargo'),
-    path('add-cargo/', add_cargo_view, name='add_cargo_form')
+    path('add-cargo/', add_cargo_view, name='add_cargo')
 ]

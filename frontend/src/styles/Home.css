@@ -1,0 +1,38 @@
+/* Home.css */
+
+/* Загальний фон сторінки */
+body {
+    background-color: #f8f9fa;
+  }
+  
+  /* Логотип у navbar */
+  .navbar-brand {
+    font-weight: 600;
+  }
+  
+  /* Перевизначення кольору для кнопок .btn-primary */
+  .btn-primary {
+    background-color: #57cc99;
+    border-color: #57cc99;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #4dbd8a;
+    border-color: #4dbd8a;
+  }
+  
+  /* Стилі для таблиці з вантажами */
+  .cargo-table thead {
+    background-color: #f1f1f1;
+  }
+  
+  /* Стилі для футер-посилань */
+  .footer-links a {
+    color: #6c757d;
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
