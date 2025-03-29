@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Cargo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cargos')
+    #user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cargos')
     loading_city_primary = models.CharField(max_length=255)
     loading_postal_primary = models.CharField(max_length=20, blank=True, null=True)
     loading_city_secondary = models.CharField(max_length=255, blank=True, null=True)
@@ -31,3 +31,10 @@ class Cargo(models.Model):
     
     def __str__(self):
         return f"{self.loading_city_primary} -> {self.unloading_city_primary}"
+    
+class EmailVerification(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f'{self.user.username} - {self.code}'

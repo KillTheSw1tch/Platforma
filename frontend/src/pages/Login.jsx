@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/loginPage.css'; // Custom styles with your variables, e.g., --main-color
-
 function LoginPage() {
   return (
     <div className="container py-5">
