@@ -1,0 +1,83 @@
+.company-overview {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .company-overview h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #003b95;
+  }
+  
+  .section {
+    margin-bottom: 25px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #444;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  .info-line {
+    margin: 5px 0;
+    font-size: 15px;
+  }
+  
+  .info-line strong {
+    color: #222;
+    margin-right: 8px;
+  }
+  
+  .badge-country {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    background-color: #f1f1f1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-left: 10px;
+  }
+  
+  .rating-stars {
+    color: #ffaa00;
+    font-size: 18px;
+  }
+  
+  .tags {
+    margin-top: 10px;
+  }
+  
+  .tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 13px;
+    margin-right: 8px;
+    margin-top: 5px;
+  }
+  
+  .verified-status {
+    font-weight: 600;
+    color: #28a745;
+  }
+  
+  .verified-status.no {
+    color: #d9534f;
+  }
+  
+  .rating-stars {
+    color: #ffaa00;
+    font-size: 16px;
+  }
+  

@@ -1,93 +1,100 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/Home.css';
+import { useTranslation } from 'react-i18next';
+import '../styles/UsetProfile.css';
+import i18n from '../i18n';
+import axios from 'axios';
 
 const UserProfile = () => {
+
+  const { t } = useTranslation();
+
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+
+    const savedLanguage = localStorage.getItem('i18nextLng');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+  
+    fetch('http://127.0.0.1:8000/api/user/profile/', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Отримані дані з бекенду:", data);  // Додаємо тут
+        if (data.username) {
+          setUserData(data);
+        } else {
+          localStorage.removeItem('authToken');
+          navigate('/login');
+        }
+      });
+  }, [navigate]);
+  
 
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
 
+    const handleLogout = () => {
+      localStorage.removeItem('authToken');
+      navigate('/login', { replace: true });
+      window.location.reload();
+    };
+    // Функция обновления профиля
+    const updateProfile = async (updatedData) => {
+      const token = localStorage.getItem('authToken');
+      try {
+        const response = await axios.put('http://127.0.0.1:8000/api/user/profile/', updatedData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        setUserData(response.data);
+        alert(t('Профіль оновлено!'));
+        setShowModal(false);
+      } catch (error) {
+        console.error('Помилка оновлення:', error);
+        alert(t('Помилка оновлення профілю.'));
+      }
+    };
+
   return (
     <div>
-      {/* Navigation */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            Platforma | <span className="text-primary"> Transportation</span>
-          </Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                  aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="languageDropdown"
-                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  English
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="languageDropdown">
-                  <li><a className="dropdown-item" href="#">Français</a></li>
-                  <li><a className="dropdown-item" href="#">Deutsch</a></li>
-                  <li><a className="dropdown-item" href="#">Italiano</a></li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/registration" className="btn btn-primary">Register</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      {/* Service Menu */}
-      <div className="bg-light border-bottom">
-        <div className="container">
-          <ul className="nav nav-pills py-2">
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="/">Domestic Cargo</Link>
-            </li>
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="#">Need Carriers?</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/add-cargo" className="btn btn-primary">Add Cargo</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-
       {/* Profile Section */}
       <div className="container my-5">
         {/* Header */}
         <div className="text-center mb-5">
-          <h2 className="fw-bold">User Profile</h2>
-          <p>Manage your profile information, company details, and preferences.</p>
-          <div className="heading-line"
-               style={{ borderBottom: '3px solid #57cc99', width: '60px', margin: '0.5rem auto 1.5rem' }}>
-          </div>
+          <h2 className="fw-bold">{t('user_profile')}</h2>
+          <p>{t('manage_profile_info')}</p>
         </div>
 
         {/* Profile Details */}
-        <div className="card shadow-sm">
-          <div className="card-body">
+        <div className="card_user shadow-sm">
+          <div className="card-body_user">
             <div className="row">
               {/* Personal Details */}
               <div className="col-md-6 border-end">
-                <h5 className="card-title text-primary mb-3">Personal Details</h5>
+                <h5 className="card-title text-primary mb-3">{t('personal_details')}</h5>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">👤 <strong>Name:</strong> John Doe</li>
-                  <li className="list-group-item">✉️ <strong>Email:</strong> johndoe@example.com</li>
-                  <li className="list-group-item">📞 <strong>Phone:</strong> +41 123 456 789</li>
-                  <li className="list-group-item">🗣️ <strong>Preferred Language:</strong> English</li>
+                  <li className="list-group-item">👤 <strong>{t('name')}:</strong> {userData.username}</li>
+                  <li className="list-group-item">✉️ <strong>{t('email')}:</strong> {userData.email}</li>
+                  <li className="list-group-item">📞 <strong>{t('phone')}:</strong> {userData.profile?.phone || 'Not provided'}</li>
+                  <li className="list-group-item">🗣️ <strong>{t('preferred_language')}:</strong> {userData.profile?.preferred_language || 'English'}</li>
                 </ul>
               </div>
 
@@ -95,109 +102,133 @@ const UserProfile = () => {
 
               {/* Company Details */}
               <div className="col-md-6">
-                <h5 className="card-title text-primary mb-3">Company Details</h5>
+                <h5 className="card-title text-primary mb-3">{t('company_details')}</h5>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">🏢 <strong>Company:</strong> Transportation Ltd.</li>
-                  <li className="list-group-item">📍 <strong>Address:</strong> Main street 45, Zurich</li>
-                  <li className="list-group-item">📌 <strong>ZIP Code:</strong> 8000</li>
-                  <li className="list-group-item">🌍 <strong>Canton:</strong> Zurich</li>
+                <li className="list-group-item">🏢 <strong>{t('company')}:</strong> {userData.profile?.company || 'Not provided'}</li>
+                <li className="list-group-item">📍 <strong>{t('address')}:</strong> {userData.profile?.address || 'Not provided'}</li>
+                <li className="list-group-item">📌 <strong>{t('zip_code')}:</strong> {userData.profile?.zip_code || 'Not provided'}</li>
+                <li className="list-group-item">🌍 <strong>{t('canton')}:</strong> {userData.profile?.canton || 'Not provided'}</li>
                 </ul>
               </div>
             </div>
             <div className="text-center mt-4">
-              <button className="btn btn-primary px-4" onClick={openModal}>
-                Edit Profile
+              <button className="bbtn-main px-4" onClick={openModal}>
+              {t('edit_profile')}
                 </button>
                 </div>
           </div>
 
-{/* Modal for Editing Profile */}
-{showModal && (
-        <div className="modal show fade" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title text-primary">Edit Profile</h5>
-                <button type="button" className="btn-close" onClick={closeModal}></button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="row g-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Name</label>
-                      <input type="text" className="form-control" defaultValue="John Doe" />
+      {/* Modal for Editing Profile */}
+        {showModal && (
+          <div className="modal show fade" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">{t('edit_profile')}</h5>
+                  <button type="button" className="btn-close" onClick={closeModal}></button>
+                </div>
+                <div className="modal-body">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  const updatedData = {
+                    username: e.target.username.value,
+                    email: e.target.email.value,
+                    profile: {
+                      company: e.target.company.value,
+                      address: e.target.address.value,
+                      zip_code: e.target.zip.value,
+                      canton: e.target.canton.value,
+                      phone: e.target.phone.value,
+                      preferred_language: e.target.language.value,
+                    }
+                  };
+                  updateProfile(updatedData);
+                }}>
+                    <div className="row g-3">
+                      <div className="col-md-6">
+                        <label className="form-label">{t('name')}</label>
+                        <input type="text" name="username" className="form-control" defaultValue={userData?.username || ''} />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">{t('email')}</label>
+                        <input type="email" name="email" className="form-control" defaultValue={userData?.email || ''} />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">{t('phone')}</label>
+                        <input 
+                          type="text"
+                          name="phone"
+                          className="form-control"
+                          defaultValue={userData.profile?.phone || ''} 
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">{t('preferred_language')}</label>
+                        <select name="language" className="form-select" defaultValue={userData.profile?.preferred_language || 'English'}>
+                          <option>{t('english')}</option>
+                          <option>{t('german')}</option>
+                          <option>{t('french')}</option>
+                          <option>{t('italian')}</option>
+                        </select>
+                      </div>
+                      <div className="col-md-12">
+                        <label className="form-label">{t('company')}</label>
+                        <input type="text" name="company" className="form-control" defaultValue={userData.profile?.company || 'Transportation Ltd.'} />
+                      </div>
+                      <div className="col-md-12">
+                        <label className="form-label">{t('address')}</label>
+                        <input type="text" name="address" className="form-control" defaultValue={userData.profile?.address || 'Main street 45, Zurich'} />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">{t('zip_code')}</label>
+                        <input type="text" name="zip" className="form-control" defaultValue={userData.profile?.zip || '8000'} />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">{t('canton')}</label>
+                        <input type="text" name="canton" className="form-control" defaultValue={userData.profile?.canton || 'Zurich'} />
+                      </div>
                     </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Email</label>
-                      <input type="email" className="form-control" defaultValue="johndoe@example.com" />
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" onClick={closeModal}>
+                        {t('close')}
+                      </button>
+                      <button type="submit" className="btn btn-primary">
+                        {t('save_changes')}
+                      </button>
                     </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Phone</label>
-                      <input type="tel" className="form-control" defaultValue="+41 123 456 789" />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Preferred Language</label>
-                      <select className="form-select">
-                        <option selected>English</option>
-                        <option>Deutsch</option>
-                        <option>Français</option>
-                        <option>Italiano</option>
-                      </select>
-                    </div>
-                    <div className="col-md-12">
-                      <label className="form-label">Company Name</label>
-                      <input type="text" className="form-control" defaultValue="Transportation Ltd." />
-                    </div>
-                    <div className="col-md-12">
-                      <label className="form-label">Address</label>
-                      <input type="text" className="form-control" defaultValue="Main street 45, Zurich" />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">ZIP Code</label>
-                      <input type="text" className="form-control" defaultValue="8000" />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Canton</label>
-                      <input type="text" className="form-control" defaultValue="Zurich" />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={closeModal}>
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary" onClick={closeModal}>
-                  Save Changes
-                </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
         </div>
 
         {/* Preferences */}
         <div className="card shadow-sm mt-4">
           <div className="card-body">
-            <h5 className="card-title text-primary mb-3">Preferences & Settings</h5>
+            <h5 className="card-title text-primary mb-3">{t('preferences_settings')}</h5>
             <ul className="list-group list-group-flush">
-              <li className="list-group-item">🔔 <strong>Notifications:</strong> Enabled</li>
-              <li className="list-group-item">🔒 <strong>Password:</strong> ************</li>
-              <li className="list-group-item">🔑 <strong>Two-factor authentication(2FA):</strong> Enabled</li>
-              <li className="list-group-item">🕒 <strong>Timezone:</strong> CET (Central European Time)</li>
+              <li className="list-group-item">🔔 <strong>{t('notifications')}:</strong> Enabled</li>
+              <li className="list-group-item">🔒 <strong>{t('password')}:</strong> ************</li>
+              <li className="list-group-item">🔑 <strong>{t('two_factor_authentication')}:</strong> Enabled</li>
+              <li className="list-group-item">🕒 <strong>{t('timezone')}:</strong> CET (Central European Time)</li>
               
             </ul>
             <div className="text-center mt-4">
-              <Link className="btn btn-secondary px-4" to="#">Manage Preferences</Link>
+              <Link className="btn btn-secondary px-4" to="#">{t('manage_preferences')}</Link>
             </div>
           </div>
         </div>
 
+
         {/* Logout Button */}
         <div className="text-center mt-4">
-          <button className="btn btn-outline-danger px-4">Log Out</button>
+          {/* Logout Button */}
+          <div className="text-center mt-4">
+            <button className="btn logout-btn px-4" onClick={handleLogout}>{t('log_out')}</button>
+          </div>
         </div>
       </div>
 
@@ -205,13 +236,13 @@ const UserProfile = () => {
       <footer className="bg-white border-top py-4 mt-5">
         <div className="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
           <p className="mb-0 text-muted">
-            © 2023 Platforma Transportation. The top transportation platform in Swiss.
+            {t('footer_text')}
           </p>
           <div className="footer-links">
-            <Link to="#">Services</Link>
-            <Link to="#">Support</Link>
-            <Link to="#">Contacts</Link>
-            <Link to="#">FAQ</Link>
+            <Link to="/services">{t('services')}</Link>
+            
+            <Link to="/contacts">{t('contacts')}</Link>
+            
           </div>
         </div>
       </footer>

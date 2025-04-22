@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from api.views import CreateUserView, UserProfileAPIView, add_cargo_view
+from api.views import CreateUserView, UserProfileAPIView, add_cargo_view, TruckViewSet, CargoViewSet, VerifyEmailCodeView, TruckListCreateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
-from api.views import CargoViewSet, VerifyEmailCodeView
 
 
 router = DefaultRouter()
 router.register(r'cargo', CargoViewSet)
+router.register(r'trucks', TruckViewSet, basename='truck')
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -22,6 +22,6 @@ urlpatterns = [
     path('login/', TemplateView.as_view(template_name='api/login.html'), name='login'),
     path('add-cargo/', add_cargo_view, name='add_cargo'),
     path('api/user/profile/', UserProfileAPIView.as_view(), name='user-profile'),
-    path('user/register/', CreateUserView.as_view(), name='register'), 
-    path('user/verify/', VerifyEmailCodeView.as_view(), name='verify'),  
+    path('api/user/verify/', VerifyEmailCodeView.as_view(), name='verify'),
+    path('trucks/', TruckListCreateView.as_view(), name='truck-list-create'),
 ]

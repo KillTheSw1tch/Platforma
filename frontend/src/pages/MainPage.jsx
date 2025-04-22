@@ -1,107 +1,295 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Home.css';
-import axios from 'axios';
+import '../styles/Home.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+import axios from 'axios';
 import CargoCard from '../components/CargoCard';
+import VehicleCard from '../components/VehicleCard';
+import DetailsPanel from '../components/DetailsPanel'; // путь к компоненту
 
-const HomePage = () => {
+
+function HomePage() {
+  const { t } = useTranslation();
   const [cargos, setCargos] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Стан для фільтра: "all" - всі, "cargo" - лише вантажі, "vehicle" - лише автомобілі
+  const [filter, setFilter] = useState("all");
+
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const [openedDetailsCardId, setOpenedDetailsCardId] = useState(null);
+
+  const [isEditing, setIsEditing] = useState(false);
+
+
+
+
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/cargo/')
-      .then(response => setCargos(response.data))
-      .catch(error => console.error('Error fetching cargos:', error));
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token);
   }, []);
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('i18nextLng');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+
+    // Отримання даних із бекенду для вантажів
+    axios.get('http://127.0.0.1:8000/api/cargo/')
+      .then(response => {
+        setCargos(response.data.filter(c => !c.hidden));
+      })
+      .catch(error => {
+        console.error("Error fetching cargos:", error);
+      });
+
+    // Отримання даних із бекенду для транспортних засобів
+    axios.get('http://127.0.0.1:8000/api/trucks/')
+      .then(response => {
+        setVehicles(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching vehicles:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    setIsDetailsOpen(false);
+    setOpenedDetailsCardId(null);
+  }, [filter]);
+  
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            Platforma | <span className="text-primary">Transportation</span>
-          </Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
-                  data-bs-toggle="dropdown">English</a>
-                <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/fr">Français</Link></li>
-                  <li><Link className="dropdown-item" to="/de">Allemand</Link></li>
-                  <li><Link className="dropdown-item" to="/it">Italien</Link></li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="btn btn-primary" to="/registration">Register</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+      {/* Service Menu – не змінюємо існуючі посилання */}
       <div className="bg-light border-bottom">
         <div className="container">
           <ul className="nav nav-pills py-2">
             <li className="nav-item me-3">
-              <Link className="nav-link active" to="/">Domestic Cargo</Link>
-            </li>
-            <li className="nav-item me-3">
-              <Link className="nav-link" to="/">Need Carriers?</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/add-cargo" className="btn btn-primary">Add Cargo</Link>
+              {isLoggedIn ? (
+                <>
+                  <Link to="/add-vehicle" className="btn btn-primary me-3">
+                    {t("add_vehicle")}
+                  </Link>
+                  <Link to="/add-cargo" className="btn btn-primary">
+                    {t("add_cargo")}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="btn btn-primary me-2"
+                    onClick={() => alert("Пожалуйста, войдите или зарегистрируйтесь перед добавлением груза или машины.")}
+                  >
+                    {t("add_vehicle")}
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => alert("Пожалуйста, войдите или зарегистрируйтесь перед добавлением груза или машины.")}
+                  >
+                    {t("add_cargo")}
+                  </button>
+                </>
+              )}
             </li>
           </ul>
         </div>
       </div>
-
-      <div className="container my-5">
+      
+      {/* Advertisement Section */}
+      <div className="container my-4">
+        <div style={{
+          backgroundColor: '#fffbea',
+          border: '1px solid #ffe58f',
+          borderRadius: '8px',
+          padding: '20px',
+          textAlign: 'center',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)'
+        }}>
+          <h4 style={{ fontWeight: 'bold', fontSize: '1.5rem', marginBottom: '10px' }}>
+            🔈 {t("advertisement") || "Рекламний блок"}
+          </h4>
+          <p style={{ fontSize: '1.1rem', color: '#555' }}>
+            🚛 Потрібен надійний перевізник? Додайте свій вантаж та отримайте пропозиції вже сьогодні!
+          </p>
+          <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="btn btn-warning">
+            👉 Детальніше
+          </a>
+        </div>
+      </div>
+      
+      {/* Фільтруючі кнопки (додаємо після рекламного блоку) */}
+      <div className="container my-4">
+        <div className="d-flex justify-content-center">
+          <button
+            type="button"
+            className="btn btn-outline-secondary "
+            onClick={() => setFilter("cargo")}
+          >
+            {t("available_cargo")}
+          </button>
+          
+          <Link to="/search-cargo" className="btn btn-primary">
+              {t("find_trans_cargo")}
+          </Link>
+          
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={() => setFilter("vehicle")}
+          >
+            {t("available_vehicle")}
+          </button>
+        </div>
+      </div>
+      
+      {/* Основний контент залежно від фільтра */}
+      <div className="container my-5 position-relative">
         <div className="row">
-          <div className="col-lg-8">
-            <h4 className="mb-4">Available Cargo</h4>
-            <div className="row">
-              {cargos.length > 0 ? cargos.map(cargo => (
-                <CargoCard key={cargo.id} cargo={cargo} />
-              )) : (
-                <div className="text-muted">No cargo available at the moment.</div>
-              )}
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="card mb-4">
-              <div className="card-body">
-                <h5 className="card-title">Need carriers?</h5>
-                <p className="card-text">
-                  Get a list of verified carriers and make your shipment easier!
-                </p>
-                <Link to="/add-cargo" className="btn btn-primary">Add Cargo</Link>
+          <div className="col-12">
+            {filter === "cargo" && (
+              <div className={`row cargo-list ${isDetailsOpen || isEditing ? 'shifted' : ''}`}>
+
+
+                <h4 className="mt-5">{t("available_cargo")}</h4>
+                {cargos.length > 0 ? cargos.map((cargo) => (
+                  <CargoCard
+                  key={cargo.id}
+                  cargo={cargo}
+                  setIsDetailsOpen={setIsDetailsOpen}
+                  openedDetailsCardId={openedDetailsCardId}
+                  setOpenedDetailsCardId={setOpenedDetailsCardId}
+                />
+                
+                )) : (
+                  <div className="text-muted">{t("no_cargos_found")}</div>
+                )}
               </div>
-            </div>
+            )}
+
+              {filter === "vehicle" && (
+                <div className={`row cargo-list ${isDetailsOpen || isEditing ? 'shifted' : ''}`}>
+
+                <h4 className="mt-5">{t("available_vehicles")}</h4>
+                
+                  {vehicles.length > 0 ? vehicles.map((vehicle) => (
+                    <VehicleCard
+                    key={vehicle.id}
+                    vehicle={vehicle}
+                    setIsDetailsOpen={setIsDetailsOpen}
+                    openedDetailsCardId={openedDetailsCardId}
+                    setOpenedDetailsCardId={setOpenedDetailsCardId}
+                    setIsEditing={setIsEditing}   // 🔥 добавь это
+                  />
+                  )) : (
+                    <div className="text-muted">{t("no_vehicles_found")}</div>
+                  )}
+                </div>
+              
+            )}
+
+            {filter === "all" && (
+              <>
+                <div className={`row cargo-list ${isDetailsOpen || isEditing ? 'shifted' : ''}`}>
+                  {cargos.length > 0 ? cargos.map((cargo) => (
+                    <CargoCard
+                    key={cargo.id}
+                    cargo={cargo}
+                    setIsDetailsOpen={setIsDetailsOpen}
+                    openedDetailsCardId={openedDetailsCardId}
+                    setOpenedDetailsCardId={setOpenedDetailsCardId}
+                  />
+                  
+                  )) : (
+                    <div className="text-muted">{t("no_cargos_found")}</div>
+                  )}
+                </div>
+
+                
+                <div className={`row cargo-list ${isDetailsOpen || isEditing ? 'shifted' : ''}`}>
+                  {vehicles.length > 0 ? vehicles.map((vehicle) => (
+                    <VehicleCard
+                    key={vehicle.id}
+                    vehicle={vehicle}
+                    setIsDetailsOpen={setIsDetailsOpen}
+                    openedDetailsCardId={openedDetailsCardId}
+                    setOpenedDetailsCardId={setOpenedDetailsCardId}
+                  />
+                  )) : (
+                    <div className="text-muted">{t("no_vehicles_found")}</div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
+          
+          
         </div>
       </div>
 
+      <DetailsPanel
+        isOpen={isDetailsOpen}
+        onClose={() => {
+          setIsDetailsOpen(false);
+          setOpenedDetailsCardId(null);
+        }}
+        cargo={cargos.find(c => c.id === openedDetailsCardId)}
+      />
+
+      
+      {/* Footer */}
       <footer className="bg-white border-top py-4 mt-5">
         <div className="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
-          <p className="mb-0 text-muted">© 2023 Platforma Transportation. The top transportation platform in Swiss.</p>
+          <p className="mb-0 text-muted">{t("footer_text")}</p>
           <div className="footer-links">
-            <Link to="/services">Services</Link>
-            <Link to="/support">Support</Link>
-            <Link to="/contacts">Contacts</Link>
-            <Link to="/faq">FAQ</Link>
+            <Link to="/services">{t("services")}</Link>
+            <Link to="/contacts">{t("contacts")}</Link>
           </div>
         </div>
       </footer>
     </div>
   );
-};
+}
 
 export default HomePage;
+
+
+/*<div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{t("search")}</h5>
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="region" className="form-label">{t("region")}</label>
+                    <select className="form-select" id="region">
+                      <option>{t("all_regions")}</option>
+                      <option>Zurich</option>
+                      <option>Bern</option>
+                      <option>Geneva</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="cargoType" className="form-label">{t("cargo_type")}</label>
+                    <select className="form-select" id="cargoType">
+                      <option>{t("all_cargo_types")}</option>
+                      <option>Equipment</option>
+                      <option>Documents</option>
+                      <option>Food</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="shipper" className="form-label">{t("shipper")}</label>
+                    <select className="form-select" id="shipper">
+                      <option>{t("all_shippers")}</option>
+                      <option>Company A</option>
+                      <option>Company B</option>
+                    </select>
+                  </div>
+                  <button type="submit" className="btn btn-primary w-100">{t("search")}</button>
+                </form>
+              </div>
+            </div>*/

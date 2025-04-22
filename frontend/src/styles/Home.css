@@ -1,38 +1,126 @@
 /* Home.css */
+.justify-content-center{
+ 
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+ 
+}
 
 /* Загальний фон сторінки */
 body {
-    background-color: #f8f9fa;
+  background-color: #8dbcf1;
+}
+
+/* Кнопка "My orders" */
+.btn-success {
+  background-color: #1c84e3;
+  border-color: #ffffff;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(28, 132, 227, 0.4);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #156fc4 !important;
+  border-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(21, 111, 196, 0.6);
+}
+
+.btn-success:active {
+  background-color: #0f5ba5 !important;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #b453cc;
+  border-color: #fdfdfd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #a7ffd6;
+  border-color: #ff0527;
+}
+
+/* Стили для таблицы */
+.cargo-table thead {
+  background-color: #ff0000;
+}
+
+/* Стили футера */
+.footer-links a {
+  color: #ff008c;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Стили для модальных окон */
+.modal-dialog {
+  max-width: 700px;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-body {
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .modal-dialog {
+    width: 95%;
+    margin: 0 auto;
   }
-  
-  /* Логотип у navbar */
-  .navbar-brand {
-    font-weight: 600;
+}
+
+/* Стиль для боковой панели */
+.edit-panel-left {
+  position: fixed;
+  top: 0;
+  left: -400px; 
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 2000;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  overflow-y: auto;
+  transition: left 0.3s ease-in-out; 
+}
+
+/* Открытие боковой панели */
+.edit-panel-left.open {
+  left: 0; 
+}
+
+/* Сдвиг контента при открытии боковой панели */
+.cargo-list.shifted {
+  margin-left: 400px; 
+  transition: margin-left 0.3s ease-in-out; 
+}
+
+@media (max-width: 768px) {
+  /* Для мобильных экранов  */
+  .cargo-list.shifted {
+    margin-left: 300px; 
+  transition: margin-left 0.3s ease-in-out; 
   }
-  
-  /* Перевизначення кольору для кнопок .btn-primary */
-  .btn-primary {
-    background-color: #57cc99;
-    border-color: #57cc99;
-  }
-  .btn-primary:hover,
-  .btn-primary:focus {
-    background-color: #4dbd8a;
-    border-color: #4dbd8a;
-  }
-  
-  /* Стилі для таблиці з вантажами */
-  .cargo-table thead {
-    background-color: #f1f1f1;
-  }
-  
-  /* Стилі для футер-посилань */
-  .footer-links a {
-    color: #6c757d;
-    text-decoration: none;
-    margin-right: 1rem;
-  }
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-  
+}
+
+/* Боковая панель с фиксированной позицией */
+.sidebar-fix {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  width: 320px;
+}
