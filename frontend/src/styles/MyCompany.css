@@ -53,3 +53,37 @@
     cursor: pointer;
   }
   
+
+  .file-upload-section {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  
+  .file-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  .file-box:hover {
+    background-color: #eef;
+    border-color: #7aa;
+  }
+  
+  .file-box input[type="file"] {
+    display: none;
+  }
+  

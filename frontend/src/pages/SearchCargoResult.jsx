@@ -89,7 +89,8 @@ function SearchCargoResult() {
         const fromCountryStr = fromCountryState ? fromCountryState.toString() : "";
         const toCountryStr = toCountryState ? toCountryState.toString() : "";
         // const fromZipNum = fromZip ? parseInt(fromZip) : null;
-        // const toZipNum = toZip ? parseInt(toZip) : null;
+        // const toZipNum = toZip ? parseInt(toZip) : 
+        // null;
         
         if (searchMode === 'cargo') {
           axios.get('http://127.0.0.1:8000/api/cargo/')

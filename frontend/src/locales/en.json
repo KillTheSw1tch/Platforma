@@ -463,7 +463,11 @@
     "montenegro": "Montenegro",
     "sweden": "Sweden",
     "sri_lanka": "Sri Lanka",
-    "japan": "Japan"
+    "japan": "Japan",
+
+    "pending_review_title": "Pending Review",
+    "pending_review_message": "Your documents are under review. You will be notified once confirmed by an administrator."
+
 
 
 

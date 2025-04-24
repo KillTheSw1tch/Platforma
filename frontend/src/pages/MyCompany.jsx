@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../styles/MyCompany.css';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../components/getToken';
+
 
 
 function MyCompany() {
@@ -26,45 +28,85 @@ function MyCompany() {
 
 
   useEffect(() => {
-    const hasCompany = false;
-    if (!hasCompany) {
-      setShowModal(true);
-      const token = localStorage.getItem('authToken');
+    const status = localStorage.getItem("documentsStatus");
+    const companyData = localStorage.getItem("companyData");
   
-      if (token) {
-        fetch('http://127.0.0.1:8000/api/user/profile/', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("👤 Данные профиля:", data);
-  
-            setUserFullName(data.username || "");
-            setEmail(data.email || "");
-            setPhone(data.profile?.phone || "");
-            setCompanyName(data.profile?.company || "");
-            setCompanyAddress(data.profile?.address || "");
-          })
-          .catch((error) => console.error("❌ Ошибка загрузки профиля:", error));
-      }
+    // 🔁 Условие: если уже отправлены и на проверке — редирект на ожидание
+    if (status === "pending" && companyData) {
+      navigate("/my-company/pending-review");
+      return;
     }
-  }, []);
+  
+    // ✅ Если всё подтверждено — сразу на обзор
+    if (companyData && status !== "pending") {
+      navigate("/my-company/overview");
+      return;
+    }
+  
+    // Если ничего не найдено — продолжаем регистрацию
+    const token = getToken();
+    if (token) {
+      setShowModal(true);
+      fetch('http://127.0.0.1:8000/api/user/profile/', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setUserFullName(data.username || "");
+          setEmail(data.email || "");
+          setPhone(data.profile?.phone || "");
+          setCompanyName(data.profile?.company || "");
+          setCompanyAddress(data.profile?.address || "");
+        })
+        .catch((error) => console.error("❌ Ошибка загрузки профиля:", error));
+    }
+  }, [navigate]);
+  
+  
+  
   
   
 
   const handleCodeSubmit = (e) => {
     e.preventDefault();
-    setShowModal(false);
-    setShowCompanyForm(true);
-
-    console.log("🌍 Страна выбрана:", selectedCountry);
-
   
-    alert('✅ Ви ввели код: ' + companyCode + '\nТепер можна показати форму компанії!');
+    // Здесь не нужно setShowModal(false) и setShowCompanyForm(true) — пока не проверим код
+  
+    console.log("🧪 Проверка отправки:", selectedCountry, companyCode);
+
+    fetch("http://127.0.0.1:8000/api/validate-company-code/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        country: selectedCountry,
+        code: companyCode
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("🔍 Ответ от сервера:", data);
+  
+        if (data.valid) {
+          alert("✅ Код підтверджено. Можна продовжити.");
+          setShowModal(false);
+          setShowCompanyForm(true);
+        } else {
+          alert("❌ Код не знайдено або недійсний.");
+          setShowModal(true); // модалка останется
+          setShowCompanyForm(false); // не показываем форму
+        }
+      })
+      .catch(error => {
+        console.error("❌ Помилка при перевірці коду:", error);
+        alert("⚠️ Сталася помилка при перевірці. Спробуйте пізніше.");
+      });
   };
+  
   
   
 
@@ -80,6 +122,7 @@ function MyCompany() {
 
                 <label>Країна</label>
                 <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                  <option value="" disabled selected hidden>🌍 {t("select_country") || "Виберіть країну"}</option>
                   <option value="switzerland">🇨🇭 {t("switzerland")}</option>
                   <option value="ukraine">🇺🇦 {t("ukraine")}</option>
                   <option value="austria">🇦🇹 {t("austria")}</option>
@@ -188,34 +231,95 @@ function MyCompany() {
         <div className="company-form">
           <h2>{t("company_details")}</h2>
 
-          <form onSubmit={(e) => {
-            e.preventDefault();
+          <form onSubmit={async (e) => {
+              e.preventDefault();
 
-            const formData = new FormData(e.target);
-            const companyData = {
-              name: formData.get("company_name"),
-              address: formData.get("company_address"),
-              email: formData.get("contact_email"),
-              phone: formData.get("phone_number"),
-              fullName: userFullName,
-              country: formData.get("company_country"), // 🔧 теперь это точно попадёт
-              code: formData.get("company_code"),       // 🔧 тоже через form, чтобы точно не сломалось
+              const token = localStorage.getItem("authToken");
+              const formData = new FormData(e.target);
 
-              registrationDate: "2023-11-10", // захардкодим пока
-              isVerified: false, // можно позже менять
-              totalOrders: 38,
-              activeOrders: 16,
-              totalCargo: 23,
-              totalVehicles: 0,
-              interest: "Міжнародний транспорт",
-              activity: "Замовник перевезення"
-            };
+              const companyData = {
+                name: formData.get("company_name"),
+                address: formData.get("company_address"),
+                email: formData.get("contact_email"),
+                phone: formData.get("phone_number"),
+                fullName: userFullName,
+                country: formData.get("company_country"),
+                code: formData.get("company_code"),
+                registrationDate: "2023-11-10",
+                isVerified: false,
+                totalOrders: 38,
+                activeOrders: 16,
+                totalCargo: 23,
+                totalVehicles: 0,
+                interest: "Міжнародний транспорт",
+                activity: "Замовник перевезення"
+              };
+
+              localStorage.setItem("companyData", JSON.stringify(companyData));
+
+              try {
+                const filesForm = new FormData();
+                if (formData.get("verification_file_1")) {
+                  filesForm.append("files", formData.get("verification_file_1"));
+                }
+                if (formData.get("verification_file_2")) {
+                  filesForm.append("files", formData.get("verification_file_2"));
+                }
+              
+                const uploadRes = await fetch("http://127.0.0.1:8000/api/company/upload-documents/", {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                  body: filesForm,
+                });
+              
+                if (!uploadRes.ok) {
+                  const err = await uploadRes.json();
+                  alert("❌ Помилка при завантаженні документів: " + (err?.detail || "невідома"));
+                  return;
+                }
+              
+                console.log("✅ Документы успешно загружены");
+              
+                // ⬇️ Проверка статуса (одобрен / отклонён / в ожидании)
+                const checkRes = await fetch("http://127.0.0.1:8000/api/company/check-approval/", {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                });
+              
+                if (checkRes.ok) {
+                  const checkData = await checkRes.json();
+              
+                  if (checkData.rejected) {
+                    alert("❌ Ваші документи були відхилені адміністратором. Зверніться до підтримки.");
+                    return;
+                  }
+              
+                  if (checkData.approved) {
+                    console.log("✅ Документы одобрены");
+                    localStorage.removeItem("documentsStatus"); // 🧼 Очищаем статус
+                    navigate("/my-company/overview");
+                  } else {
+                    localStorage.setItem("documentsStatus", "pending"); // 👈 гарантируем установку, если не было
+                    navigate("/my-company/pending-review");
+                  }
+                                   
+              
+                } else {
+                  alert("⚠️ Не вдалося перевірити статус документів. Спробуйте пізніше.");
+                }
+              
+              } catch (error) {
+                console.error("Ошибка загрузки файлов или проверки:", error);
+                alert("⚠️ Щось пішло не так. Перевірте з'єднання або спробуйте пізніше.");
+              }
+              
+            }}>
 
 
-            console.log("✅ Company Data перед сохранением:", companyData);
-            localStorage.setItem('companyData', JSON.stringify(companyData));
-            navigate("/my-company/overview");
-          }}>
 
 
             <label>{t("company_name")}</label>
@@ -244,6 +348,41 @@ function MyCompany() {
             <label>{t("company_code")}</label>
             <input type="text" name="company_code" value={companyCode} readOnly hidden />
 
+            <div className="file-upload-section">
+              <label className="file-box">
+                <span>📄 Документ 1 (PDF/JPG)</span>
+                <input
+                  type="file"
+                  name="verification_file_1"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => {
+                    const label = e.target.closest("label");
+                    if (label && e.target.files[0]) {
+                      const fileName = e.target.files[0].name;
+                      const span = label.querySelector("span");
+                      if (span) span.textContent = "✅ " + fileName;
+                    }
+                    
+                  }}
+                  required
+                />
+              </label>
+
+              <label className="file-box">
+                <span>📄 Документ 2 (PDF/JPG)</span>
+                <input
+                  type="file"
+                  name="verification_file_2"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => {
+                    const fileName = e.target.files[0]?.name;
+                    if (fileName) {
+                      e.target.previousSibling.textContent = "✅ " + fileName;
+                    }
+                  }}
+                />
+              </label>
+            </div>
 
             <button type="submit" className="submit-btn">
               {t("save")}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import { getToken } from '../components/getToken';
 
 function Layout() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -8,7 +9,7 @@ function Layout() {
   const navigate = useNavigate();
 
   const updateAuthStatus = () => {
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
     if (token) {
       fetch('http://127.0.0.1:8000/api/user/profile/', {
         method: 'GET',

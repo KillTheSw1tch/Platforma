@@ -13,6 +13,8 @@ import random
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import permission_classes
+
 
 import logging
 
@@ -142,3 +144,56 @@ class TruckViewSet(viewsets.ModelViewSet):
 class TruckListCreateView(generics.ListCreateAPIView):
     queryset = Truck.objects.all()
     serializer_class = TruckSerializer 
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['POST'])
+def validate_company_code(request):
+    country = request.data.get('country')
+    code = request.data.get('code')
+
+    print("🔍 Проверка кода:", country, code)
+
+    # Примитивная проверка для теста
+    if country == "switzerland" and code.startswith("CHE-") and len(code) > 10:
+        return Response({"valid": True})
+    elif country == "ukraine" and code.isdigit() and len(code) == 8:
+        return Response({"valid": True})
+    else:
+        return Response({"valid": False})
+
+from rest_framework.parsers import MultiPartParser, FormParser
+from .models import CompanyDocument
+from .serializers import CompanyDocumentSerializer
+
+class CompanyDocumentUploadView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, *args, **kwargs):
+        files = request.FILES.getlist('files')
+        documents = []
+
+        for file in files:
+            doc = CompanyDocument.objects.create(user=request.user, file=file)
+            documents.append(doc)
+
+        serializer = CompanyDocumentSerializer(documents, many=True)
+        return Response(serializer.data, status=201)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_documents_approval(request):
+    user = request.user
+    documents = CompanyDocument.objects.filter(user=user)
+
+    if not documents.exists():
+        return Response({"approved": False, "rejected": False, "message": "Документы не найдены"}, status=404)
+
+    if any(doc.is_rejected for doc in documents):
+        return Response({"approved": False, "rejected": True, "message": "Документы отклонены"}, status=200)
+
+    all_approved = all(doc.is_approved for doc in documents)
+    return Response({"approved": all_approved, "rejected": False}, status=200)
+

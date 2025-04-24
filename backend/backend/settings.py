@@ -166,3 +166,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5174',
 ]
 CORS_ALLOWS_CREDENTIALS = True
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

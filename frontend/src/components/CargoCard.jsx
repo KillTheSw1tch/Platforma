@@ -387,74 +387,68 @@
 
 
 
-          {showDetails && (
-            <div className={`edit-panel-left open`}>
-              <button className="edit-close-btn" onClick={closeDetails}>
-                &times;
-              </button>
+  {showDetails && (
+    <div className="mt-4 p-3 border-top rounded bg-light">
+      <h5 className="mb-3">
+        {t("details_of")} {cargo.loading_canton}, {cargo.loading_city_primary} → {cargo.unloading_canton}, {cargo.unloading_city_primary}
+      </h5>
 
+      <p>
+        📅 <strong>{t("from")}:</strong> {new Date(cargo.date_from).toLocaleDateString()}<br />
+        📅 <strong>{t("to")}:</strong> {new Date(cargo.date_to).toLocaleDateString()}<br />
+        🏠 <strong>{t("loading_street")}:</strong> {cargo.cargo_loading_street || 'N/A'}<br />
+        🏁 <strong>{t("unloading_street")}:</strong> {cargo.cargo_unloading_street || 'N/A'}<br />
+        📦 <strong>{t("type")}:</strong> {cargo.cargo_type}<br />
+        🚚 <strong>{t("transport_type")}:</strong> {transportTypes[cargo.transport_type] || t("unknown")}<br />
+        ⚖️ <strong>{t("weight")}:</strong> {cargo.weight} t<br />
+        📐 <strong>{t("volume")}:</strong> {cargo.volume ? `${cargo.volume} m³` : 'N/A'}<br />
+        📝 <strong>{t("notes")}:</strong> {cargo.extra_info || 'No extra info'}
+      </p>
 
-              <div className="edit-details-content">
-                <h4 className="edit-title">
-                  {t("details_of")} {cargo.loading_canton}, {cargo.loading_city_primary} ({cargo.loading_postal_primary}) → {cargo.unloading_canton}, {cargo.unloading_city_primary} ({cargo.unloading_postal_primary})
-                </h4>
+      <h6>{t("contact_information")}</h6>
+      <p>
+        🏢 <strong>{t("company")}:</strong> {cargo.company_name || 'N/A'}<br />
+        👤 <strong>{t("name")}:</strong> {cargo.contact_name || 'N/A'}<br />
+        🌟 <strong>{t("rating")}:</strong> {renderStars(cargo.rating || 4)}<br />
+        📞 <strong>{t("phone_1")}:</strong> {cargo.phone_number || 'N/A'}<br />
+        ✉️ <strong>{t("email")}:</strong> {cargo.email || 'N/A'}<br />
+        💬 <strong>{t("viber_whatsapp_1")}:</strong> {cargo.viber_whatsapp_number || 'N/A'}
+      </p>
 
-                <p>
-                  📅 <strong>{t("from")}</strong> {cargo.date_from}<br />
-                  📅 <strong>{t("to")}</strong> {cargo.date_to}<br />
-                  🏠 <strong>{t("loading_street")}</strong> {cargo.cargo_loading_street || 'N/A'}<br />
-                  🏁 <strong>{t("unloading_street")}</strong> {cargo.cargo_unloading_street || 'N/A'}<br />
-                  📦 <strong>{t("type")}</strong> {cargo.cargo_type}<br />
-                  🚚 <strong>{t("transport_type")}</strong> {transportTypes[cargo.transport_type] || t("unknown")}<br />
-                  ⚖️ <strong>{t("weight")}</strong> {cargo.weight} t<br />
-                  📐 <strong>{t("volume")}</strong> {cargo.volume ? cargo.volume + ' m³' : 'N/A'}<br />
-                  📝 <strong>{t("notes")}</strong> {cargo.extra_info || 'No extra info'}
-                </p>
+      <h6>{t("reviews")}</h6>
+      <div style={{
+        maxHeight: '250px',
+        overflowY: 'auto',
+        padding: '15px',
+        border: '1px solid #ddd',
+        borderRadius: '5px',
+        backgroundColor: '#f8f9fa',
+        marginTop: '10px',
+        width: '100%'
+      }}>
+        {Array.from({ length: 2 }, (_, index) => ({
+          author: `User ${index + 1}`,
+          text: `This is review number ${index + 1}. The review text is intentionally made longer to test how it fits within the wider review box.`
+        })).map((review, index) => (
+          <div key={index} style={{
+            marginBottom: '8px',
+            padding: '10px',
+            backgroundColor: '#e9ecef',
+            borderRadius: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '1.1rem',
+            wordWrap: 'break-word'
+          }}>
+            <span style={{ marginRight: '8px', fontSize: '20px' }}>👤</span>
+            <strong style={{ marginRight: '8px' }}>{review.author}:</strong>
+            {review.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
 
-                <h5>{t("contact_information")}</h5>
-                <p>
-                  🏢 <strong>{t("company")}:</strong> {cargo.company_name || 'N/A'}<br />
-                  👤 <strong>{t("name")}:</strong> {cargo.contact_name || 'N/A'}<br />
-                  🌟 <strong>{t("rating")}:</strong> {renderStars(cargo.rating || 4)}<br />
-                  📞 <strong>{t("phone_1")}:</strong> {cargo.phone_number || 'N/A'}<br />
-                  ✉️ <strong>{t("email")}:</strong> {cargo.email || 'N/A'}<br />
-                  💬 <strong>{t("viber_whatsapp_1")}:</strong> {cargo.viber_whatsapp_number || 'N/A'}
-                </p>
-
-                <h5>{t("reviews")}</h5>
-                <div style={{
-                  maxHeight: '250px',
-                  overflowY: 'auto',
-                  padding: '15px',
-                  border: '1px solid #ddd',
-                  borderRadius: '5px',
-                  backgroundColor: '#f8f9fa',
-                  marginTop: '10px',
-                  width: '100%'
-                }}>
-                  {Array.from({ length: 2 }, (_, index) => ({
-                    author: `User ${index + 1}`,
-                    text: `This is review number ${index + 1}. The review text is intentionally made longer to test how it fits within the wider review box.`
-                  })).map((review, index) => (
-                    <div key={index} style={{
-                      marginBottom: '8px',
-                      padding: '10px',
-                      backgroundColor: '#e9ecef',
-                      borderRadius: '4px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '1.1rem',
-                      wordWrap: 'break-word'
-                    }}>
-                      <span style={{ marginRight: '8px', fontSize: '20px' }}>👤</span>
-                      <strong style={{ marginRight: '8px' }}>{review.author}:</strong>
-                      {review.text}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
 
 
 

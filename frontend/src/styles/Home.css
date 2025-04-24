@@ -83,20 +83,22 @@ body {
   }
 }
 
+
 /* Стиль для боковой панели */
-.edit-panel-left {
-  position: fixed;
-  top: 0;
-  left: -400px; 
-  width: 400px;
-  height: 100%;
-  background-color: #fff;
-  z-index: 2000;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  overflow-y: auto;
-  transition: left 0.3s ease-in-out; 
+.sticky-details-panel {
+  position: sticky;
+  top: 100px;
+  flex: 0 0 340px;
+  max-width: 340px;
+  height: fit-content;
+  padding-bottom: 100px;
+
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 10;
 }
+
 
 /* Открытие боковой панели */
 .edit-panel-left.open {
@@ -123,4 +125,55 @@ body {
   right: 0;
   top: 100px;
   width: 320px;
+}
+
+/* Главный контейнер */
+.main-flex-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* важно для маленьких экранов */
+  width: 100%;
+}
+
+.panel-wrapper {
+  flex: 0 0 300px;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.cards-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+/* 📱 Даже на мобилке оставляем горизонтально */
+@media (max-width: 768px) {
+  .main-flex-container {
+    flex-direction: row;
+    overflow-x: hidden; /* отключаем горизонтальный скролл */
+  }
+
+  .panel-wrapper {
+    flex: 0 0 300px;
+    min-width: 300px;
+    max-width: 300px;
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+    background-color: white;
+  }
+
+  .cards-wrapper {
+    flex: 1;
+    margin-left: 20px; /* сдвигаем карточки вправо */
+  }
+
+  .cards-wrapper .card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
 }

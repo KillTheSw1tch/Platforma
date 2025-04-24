@@ -22,3 +22,13 @@ class TruckAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'company', 'preferred_language')
     search_fields = ('user__username', 'company')
+
+    
+from .models import CompanyDocument  # если еще не импортировано выше
+
+@admin.register(CompanyDocument)
+class CompanyDocumentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'file', 'uploaded_at', 'is_approved', 'is_rejected')
+    list_filter = ('is_approved', 'is_rejected', 'uploaded_at')
+    list_editable = ('is_approved', 'is_rejected')
+    search_fields = ('user__username',)

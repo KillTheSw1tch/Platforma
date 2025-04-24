@@ -24,6 +24,8 @@ import SearchTransportResult from './pages/SearchTransportResult';
 import MyOrdersCombined from './pages/MyOrdersCombined'; 
 import MyCompany from './pages/MyCompany.jsx'; 
 import CompanyOverview from './pages/CompanyOverview';
+import PendingReview from "./pages/PendingReview";
+
 
 
 
@@ -50,6 +52,7 @@ function App() {
           <Route path="/my-orders" element={<MyOrdersCombined />} />
           <Route path="/my-company" element={<MyCompany />} />
           <Route path="/my-company/overview" element={<CompanyOverview />} />
+          <Route path="/my-company/pending-review" element={<PendingReview />} />
 
 
 

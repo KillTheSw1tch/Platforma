@@ -1,5 +1,52 @@
-/* .cargo-list.shifted {
-  
-  transition: margin-left 0.3s ease-in-out;
-  position: relative;
-} */
+/* Основной flex контейнер */
+.main-flex-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: 0;         /* убираем лишний отступ сверху */
+  padding-top: 0;
+}
+
+/* Левая панель (детали) */
+.panel-wrapper {
+  flex: 0 0 340px;
+  max-width: 340px;
+  min-width: 340px;
+  position: sticky;
+  top: 100px;             /* расстояние от верха */
+  height: calc(100vh - 120px); /* заполняет почти всю высоту */
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* Правая колонка с карточками */
+.cards-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 0;        /* убираем отступ, чтобы не было смещения */
+  padding-top: 0;
+}
+
+.cards-wrapper .card {
+  width: 100%;
+}
+
+/* Сама панель (внутри wrapper) */
+.sticky-details-panel {
+  position: sticky;
+  top: 100px;
+  flex: 0 0 340px;
+  max-width: 340px;
+  height: fit-content;
+  padding-bottom: 100px;
+
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 10;
+}

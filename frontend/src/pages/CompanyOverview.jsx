@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import '../styles/CompanyOverview.css';
+import { getToken } from '../components/getToken';
 
 const CompanyOverview = () => {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ const CompanyOverview = () => {
   useEffect(() => {
     const saved = localStorage.getItem('companyData');
     const email = localStorage.getItem('userEmail');
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
 
     if (!saved || !email || !token) return;
 

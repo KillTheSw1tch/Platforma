@@ -1,7 +1,7 @@
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Cargo, Profile, Truck
+from .models import Cargo, Profile, Truck, CompanyDocument
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -83,4 +83,12 @@ class ExtendedUserSerializer(serializers.ModelSerializer):
 
         return instance
     
+from .models import CompanyDocument
+
+class CompanyDocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyDocument
+        fields = ['id', 'user', 'file', 'uploaded_at']
+        read_only_fields = ['id', 'uploaded_at']
+
     

@@ -1,10 +1,16 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from api.views import CreateUserView, UserProfileAPIView, add_cargo_view, TruckViewSet, CargoViewSet, VerifyEmailCodeView, TruckListCreateView
+from api.views import (
+    CreateUserView, UserProfileAPIView, add_cargo_view, TruckViewSet, CargoViewSet,
+    VerifyEmailCodeView, TruckListCreateView, validate_company_code,
+    CompanyDocumentUploadView, check_documents_approval
+)
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register(r'cargo', CargoViewSet)
@@ -24,4 +30,11 @@ urlpatterns = [
     path('api/user/profile/', UserProfileAPIView.as_view(), name='user-profile'),
     path('api/user/verify/', VerifyEmailCodeView.as_view(), name='verify'),
     path('trucks/', TruckListCreateView.as_view(), name='truck-list-create'),
+    path("api/validate-company-code/", validate_company_code, name="validate-company-code"),
+    path('api/company/upload-documents/', CompanyDocumentUploadView.as_view(), name='upload-documents'),
+    path('api/company/check-approval/', check_documents_approval, name='check-documents-approval'),
 ]
+
+# ✅ Добавляем отдачу media файлов только в режиме разработки
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

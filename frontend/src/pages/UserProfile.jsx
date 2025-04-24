@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import '../styles/UsetProfile.css';
 import i18n from '../i18n';
 import axios from 'axios';
+import { getToken } from '../components/getToken';
+
 
 const UserProfile = () => {
 
@@ -19,7 +21,8 @@ const UserProfile = () => {
     if (savedLanguage) {
       i18n.changeLanguage(savedLanguage);
     }
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
+
     if (!token) {
       navigate('/login');
       return;
@@ -56,7 +59,8 @@ const UserProfile = () => {
     };
     // Функция обновления профиля
     const updateProfile = async (updatedData) => {
-      const token = localStorage.getItem('authToken');
+      const token = getToken();
+
       try {
         const response = await axios.put('http://127.0.0.1:8000/api/user/profile/', updatedData, {
           headers: {

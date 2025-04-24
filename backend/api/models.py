@@ -92,3 +92,17 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+def user_directory_path(instance, filename):
+    # файлы будут сохраняться, например: company_docs/user_7/название_файла.pdf
+    return f'company_docs/user_{instance.user.id}/{filename}'
+
+class CompanyDocument(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=user_directory_path)  # вот здесь меняем
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.file.name}"

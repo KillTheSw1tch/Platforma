@@ -6,6 +6,7 @@ import { search } from 'swiss-zipcodes';
 import '../styles/TruckForm.css';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { getToken } from '../components/getToken';
 
 function TruckPostingForm() {
   const { t } = useTranslation();
@@ -170,7 +171,7 @@ const handleZipChange = (e, fieldPrefix) => {
     console.log("📦 Данні перед відправкою:", JSON.stringify(formattedData, null, 2));
 
     
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
 
     try {
         const response = await axios.post('http://127.0.0.1:8000/api/trucks/', formattedData, {

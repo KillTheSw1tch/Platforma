@@ -395,87 +395,67 @@ const transportTypesList = [
 
 
 
-          {showDetails && (
-            <div className={`edit-panel-left open`}>
-            <button className="edit-close-btn" onClick={closeDetails}>
-              &times;
-            </button>
+        {showDetails && vehicle && (
+  <div className="mt-4 p-3 border-top rounded bg-light">
+    <h5 className="mb-3">
+      {t("details_of")} {vehicle.loading_canton}, {vehicle.loading_city} → {vehicle.unloading_canton}, {vehicle.unloading_city}
+    </h5>
 
-                <div className="edit-details-content">
-                        <h4 className="edit-title">
-                            {t("details_of")} {vehicle.loading_canton}, {vehicle.loading_city}, ({vehicle.loading_postal}) → {vehicle.unloading_canton}, {vehicle.unloading_city}, ({vehicle.unloading_postal})
-                        </h4>
-                        <p>
-                        📅 <strong>{t("from")}</strong> {vehicle.loading_date_from} <br/>
-                        📅 <strong>{t("to")}</strong> {vehicle.loading_date_to}<br/>
-                        🏠 <strong>{t("loading_street")}</strong> {vehicle.truck_loading_street || 'N/A'}<br />
-                        🏁 <strong>{t("unloading_street")}</strong> {vehicle.truck_unloading_street || 'N/A'}<br />
-                        🚚 <strong>{t("transport_type")}</strong> {transportTypes[vehicle.vehicle_type] || t("unknown")}<br/>
-                        ⚖️ <strong>{t("weight")}</strong> {vehicle.carrying_capacity} t<br/>
-                        📐 <strong>{t("volume")}</strong> {vehicle.useful_volume ? vehicle.useful_volume + ' m³' : 'N/A'}<br/>
-                        📝 <strong>{t("notes")}:</strong> {vehicle.additional_info || 'No extra info'}
-                        </p>
-                    
-                    
-                        <h5>{t("contact_information")}</h5>
-                        <p>
-                            🏢 <strong>{t("company")}:</strong> <Link to="#">{vehicle.company_name || 'N/A'}</Link> <br />
-                            👤 <strong>{t("name")}:</strong> {vehicle.contact_name || 'N/A'} <br />
-                            🌟 <strong>{t("rating")}:</strong>
-                            <span style={{ display: 'inline-block', marginLeft: '8px' }}>
-                                {(() => {
-                                    const testRating = 4;
-                                    return (
-                                        <span>{renderStars(vehicle.rating || testRating)}</span>
-                                    );
-                                })()}
-                            </span> <br />
-                            📞 <strong>{t("phone_1")}:</strong> {vehicle.phone || 'N/A'} <br />
-                            ✉️ <strong>{t("email")}:</strong> {vehicle.email || 'N/A'} <br />
-                            💬 <strong>{t("viber_whatsapp_1")}:</strong> {vehicle.whatsapp || 'N/A'} <br />
-                        </p>
-                    
-                
+    <p>
+      📅 <strong>{t("from")}:</strong> {new Date(vehicle.loading_date_from).toLocaleDateString()}<br />
+      📅 <strong>{t("to")}:</strong> {new Date(vehicle.loading_date_to).toLocaleDateString()}<br />
+      🏠 <strong>{t("loading_street")}:</strong> {vehicle.truck_loading_street || 'N/A'}<br />
+      🏁 <strong>{t("unloading_street")}:</strong> {vehicle.truck_unloading_street || 'N/A'}<br />
+      🚚 <strong>{t("transport_type")}:</strong> {transportTypes[vehicle.vehicle_type] || t("unknown")}<br />
+      ⚖️ <strong>{t("weight")}:</strong> {vehicle.carrying_capacity} t<br />
+      📐 <strong>{t("volume")}:</strong> {vehicle.useful_volume ? `${vehicle.useful_volume} m³` : 'N/A'}<br />
+      📝 <strong>{t("notes")}:</strong> {vehicle.additional_info || 'No extra info'}
+    </p>
 
-                
-                        <h5>{t("reviews")}</h5>
-                        <div style={{
-                            maxHeight: '250px',
-                            overflowY: 'auto',
-                            padding: '15px',
-                            border: '1px solid #ddd',
-                            borderRadius: '5px',
-                            backgroundColor: '#f8f9fa',
-                            marginTop: '10px',
-                            width: '100%'
-                        }}>
-                                {Array.from({ length: 2 }, (_, index) => ({
-                                    author: `User ${index + 1}`,
-                                    text: `This is review number ${index + 1}. The review text is intentionally made longer to test how it fits within the wider review box.`
-                                })).map((review, index) => (
-                                        <div key={index} style={{
-                                            marginBottom: '8px',
-                                            padding: '10px',
-                                            backgroundColor: '#e9ecef',
-                                            borderRadius: '4px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            fontSize: '1.1rem',
-                                            wordWrap: 'break-word'
-                                        }}>
-                                            <span style={{ marginRight: '8px', fontSize: '20px' }}>👤</span>
-                                            <strong style={{ marginRight: '8px' }}>{review.author}:</strong> 
-                                            {review.text}
-                                        </div>
-                                      ))}
-                                  
+    <h6>{t("contact_information")}</h6>
+    <p>
+      🏢 <strong>{t("company")}:</strong> {vehicle.company_name || 'N/A'}<br />
+      👤 <strong>{t("name")}:</strong> {vehicle.contact_name || 'N/A'}<br />
+      🌟 <strong>{t("rating")}:</strong> {renderStars(vehicle.rating || 4)}<br />
+      📞 <strong>{t("phone_1")}:</strong> {vehicle.phone || 'N/A'}<br />
+      ✉️ <strong>{t("email")}:</strong> {vehicle.email || 'N/A'}<br />
+      💬 <strong>{t("viber_whatsapp_1")}:</strong> {vehicle.whatsapp || 'N/A'}
+    </p>
 
+    <h6>{t("reviews")}</h6>
+    <div style={{
+      maxHeight: '250px',
+      overflowY: 'auto',
+      padding: '15px',
+      border: '1px solid #ddd',
+      borderRadius: '5px',
+      backgroundColor: '#f8f9fa',
+      marginTop: '10px',
+      width: '100%'
+    }}>
+      {Array.from({ length: 2 }, (_, index) => ({
+        author: `User ${index + 1}`,
+        text: `This is review number ${index + 1}. The review text is intentionally made longer to test how it fits within the wider review box.`
+      })).map((review, index) => (
+        <div key={index} style={{
+          marginBottom: '8px',
+          padding: '10px',
+          backgroundColor: '#e9ecef',
+          borderRadius: '4px',
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '1.1rem',
+          wordWrap: 'break-word'
+        }}>
+          <span style={{ marginRight: '8px', fontSize: '20px' }}>👤</span>
+          <strong style={{ marginRight: '8px' }}>{review.author}:</strong>
+          {review.text}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
-
-                                </div>
-                              </div>
-                            </div>
-                          )}
 
 
 
