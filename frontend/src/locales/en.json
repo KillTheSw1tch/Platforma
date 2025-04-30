@@ -14,6 +14,10 @@
     "all_regions": "All regions",
     "cargo_type": "Cargo Type",
     "all_cargo_types": "All cargo types",
+<<<<<<< Updated upstream
+=======
+    "shipper": "Shipper",
+>>>>>>> Stashed changes
     "all_shippers": "All shippers",
     "carriers_hint": "Get a list of verified carriers and make your shipment easier.",
     "footer_text": "© 2023 Platforma Transportation. The top transportation platform in Swiss.",
@@ -36,7 +40,10 @@
     "please_select": "Please select",
     "mr": "Mr.",
     "ms": "Ms.",
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
     "first_name": "First Name",
     "surname": "Surname",
     "password": "Password",
@@ -84,7 +91,10 @@
     "cargo_details": "Cargo Details",
     "cargo_type1": "Cargo Type",
     "weight_tons": "Weight (tons)",
+<<<<<<< Updated upstream
     "weight": "Weight",
+=======
+>>>>>>> Stashed changes
     "volume_m3": "Volume (m³)",
     "no_additional_loading": "No Additional Loading (separate truck)",
     "additional_loading": "Additional Loading",
@@ -106,8 +116,11 @@
     "add_payment_details": "+ Add Payment Details",
     "contact_information": "Contact Information",
     "viber_whatsapp": "Viber / WhatsApp",
+<<<<<<< Updated upstream
     "whatsapp": "WhatsApp",
     "viber": "Viber",
+=======
+>>>>>>> Stashed changes
     "add": "Add",
     "skype": "Skype",
     "extra_information": "Extra Information",
@@ -137,6 +150,7 @@
     "save": "Save",
     "close": "Close",
     "tarp": "Tarp",
+<<<<<<< Updated upstream
     "extra": "Extra",
     "add_vehicle": "Add Vehicle",
     "offer_transport": "Offer Transport Services",
@@ -249,10 +263,13 @@
     "chemical_tanker": "Chemical Tanker",
     "plastic_tank": "Plastic Tank",
     "chip_truck": "Chip Truck",
+=======
+>>>>>>> Stashed changes
     "closed": "Closed",
     "isothermal": "Isothermal",
     "all_metal": "All-Metal",
     "refrigerator": "Refrigerator",
+<<<<<<< Updated upstream
     "minimum_weight": "Minimum weight",
     "maximum_weight": "Maximum weight",
     "minimum_volume": "Minimum volume",
@@ -477,5 +494,11 @@
 
         
 
+=======
+    "extra": "Extra"
+
+
+
+>>>>>>> Stashed changes
     
 }

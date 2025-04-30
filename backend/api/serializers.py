@@ -1,8 +1,14 @@
+<<<<<<< Updated upstream
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Cargo, Profile, Truck, CompanyDocument
 
+=======
+from rest_framework import serializers
+from django.contrib.auth.models import User
+from .models import Cargo
+>>>>>>> Stashed changes
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -26,16 +32,19 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Этот email уже используется.")
         return value
 
+<<<<<<< Updated upstream
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
         
+=======
+>>>>>>> Stashed changes
     def create(self, validated_data):
-        user =  User.objects.create_user(**validated_data)
-        return user
+        return User.objects.create_user(**validated_data)
 
 class CargoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cargo
+<<<<<<< Updated upstream
         fields = '__all__'
 
 class TruckSerializer(serializers.ModelSerializer):
@@ -92,3 +101,6 @@ class CompanyDocumentSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'uploaded_at']
 
     
+=======
+        fields = "__all__"
+>>>>>>> Stashed changes

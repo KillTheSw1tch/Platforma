@@ -14,7 +14,11 @@
     "all_regions": "Tutte le regioni",
     "cargo_type": "Tipo di carico",
     "all_cargo_types": "Tutti i tipi di carico",
+<<<<<<< Updated upstream
     "shipper1": "Mittente",
+=======
+    "shipper": "Mittente",
+>>>>>>> Stashed changes
     "all_shippers": "Tutti i mittenti",
     "carriers_hint": "Ottieni un elenco di trasportatori verificati e semplifica la tua spedizione.",
     "footer_text": "© 2023 Platforma Transportation. La principale piattaforma di trasporto in Svizzera.",
@@ -134,6 +138,7 @@
     "save": "Salva",
     "close": "Chiudi",
     "tarp": "Telo",
+<<<<<<< Updated upstream
     "extra": "Extra",
     "loading_city": "Città di carico",
     "loading_postal_code": "Codice postale di carico",
@@ -244,10 +249,13 @@
     "chemical_tanker": "Cisterna chimica",
     "plastic_tank": "Serbatoio in plastica",
     "chip_truck": "Camion per trucioli",
+=======
+>>>>>>> Stashed changes
     "closed": "Chiuso",
     "isothermal": "Isotermico",
     "all_metal": "Tutto metallo",
     "refrigerator": "Frigorifero",
+<<<<<<< Updated upstream
     "minimum_weight": "Peso minimo",
     "maximum_weight": "Peso massimo",
     "minimum_volume": "Volume minimo",
@@ -469,6 +477,9 @@
 
     
 
+=======
+    "extra": "Extra"
+>>>>>>> Stashed changes
 
 
     

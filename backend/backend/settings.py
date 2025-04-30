@@ -121,6 +121,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
+<<<<<<< Updated upstream
 
 CORS_ALLOW_METHODS = [
     'GET',
@@ -140,18 +141,33 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # Email configuration (Gmail and Outlook)
+=======
+CORS_ALLOWS_CREDENTIALS = True
+
+
+# =============================
+# Email конфигурация Gmail и Outlook
+# =============================
+
+# Gmail
+>>>>>>> Stashed changes
 GMAIL_HOST = 'smtp.gmail.com'
 GMAIL_PORT = 587
 GMAIL_USE_TLS = True
 GMAIL_USER = os.getenv('GMAIL_USER')
 GMAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
 
+<<<<<<< Updated upstream
+=======
+# Outlook
+>>>>>>> Stashed changes
 OUTLOOK_HOST = 'smtp.office365.com'
 OUTLOOK_PORT = 587
 OUTLOOK_USE_TLS = True
 OUTLOOK_USER = os.getenv('OUTLOOK_USER')
 OUTLOOK_PASSWORD = os.getenv('OUTLOOK_PASSWORD')
 
+<<<<<<< Updated upstream
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -171,3 +187,13 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+=======
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = GMAIL_HOST
+EMAIL_PORT = GMAIL_PORT
+EMAIL_USE_TLS = GMAIL_USE_TLS
+EMAIL_HOST_USER = GMAIL_USER
+EMAIL_HOST_PASSWORD = GMAIL_PASSWORD
+DEFAULT_FROM_EMAIL = GMAIL_USER
+>>>>>>> Stashed changes

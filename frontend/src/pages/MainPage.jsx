@@ -1,9 +1,15 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from 'react';
 import '../styles/Home.css'; 
+=======
+import React, { useEffect } from 'react';
+import '../styles/Home.css';
+>>>>>>> Stashed changes
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+<<<<<<< Updated upstream
 import axios from 'axios';
 import CargoCard from '../components/CargoCard';
 import VehicleCard from '../components/VehicleCard';
@@ -26,11 +32,19 @@ function HomePage() {
     setIsLoggedIn(!!token);
   }, []);
 
+=======
+
+function HomePage() {
+  const { t } = useTranslation();
+
+  // Используем сохраненный язык при загрузке страницы
+>>>>>>> Stashed changes
   useEffect(() => {
     const savedLanguage = localStorage.getItem('i18nextLng');
     if (savedLanguage) {
       i18n.changeLanguage(savedLanguage);
     }
+<<<<<<< Updated upstream
 
     axios.get('http://127.0.0.1:8000/api/cargo/')
       .then(response => {
@@ -57,10 +71,73 @@ function HomePage() {
   return (
     <div>
       {/* Верхнее меню */}
+=======
+  }, []);
+
+  // Функция изменения языка с сохранением в localStorage
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('i18nextLng', lng); // Сохранение языка
+  };
+
+  return (
+    <div>
+      {/* Navigation */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            Platforma | <span className="text-primary">{t("transportation")}</span>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="languageDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {t("language")}
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="languageDropdown">
+                  <li><button className="dropdown-item" onClick={() => changeLanguage('en')}>English</button></li>
+                  <li><button className="dropdown-item" onClick={() => changeLanguage('fr')}>Français</button></li>
+                  <li><button className="dropdown-item" onClick={() => changeLanguage('de')}>Deutsch</button></li>
+                  <li><button className="dropdown-item" onClick={() => changeLanguage('it')}>Italiano</button></li>
+                </ul>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">{t("login")}</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/registration">{t("register")}</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* Service Menu */}
+>>>>>>> Stashed changes
       <div className="bg-light border-bottom">
         <div className="container">
           <ul className="nav nav-pills py-2">
             <li className="nav-item me-3">
+<<<<<<< Updated upstream
               {isLoggedIn ? (
                 <>
                   <Link to="/add-vehicle" className="btn btn-primary me-3">{t("add_vehicle")}</Link>
@@ -72,11 +149,23 @@ function HomePage() {
                   <button className="btn btn-primary" onClick={() => alert("Пожалуйста, войдите или зарегистрируйтесь.")}>{t("add_cargo")}</button>
                 </>
               )}
+=======
+              <a className="nav-link active" href="#">{t("domestic_cargo")}</a>
+            </li>
+            <li className="nav-item me-3">
+              <a className="nav-link" href="#">{t("need_carriers")}</a>
+            </li>
+            <li className="nav-item">
+              <a href="/add-cargo" className="btn btn-primary">
+                {t("add_cargo")}
+              </a>
+>>>>>>> Stashed changes
             </li>
           </ul>
         </div>
       </div>
 
+<<<<<<< Updated upstream
       {/* Реклама */}
       <div className="container my-4">
         <div style={{
@@ -191,11 +280,112 @@ function HomePage() {
                     </div>
                   </>
                 )}
+=======
+      {/* Main Content */}
+      <div className="container my-5">
+        <div className="row">
+          <div className="col-lg-8">
+            <h4 className="mb-4">{t("available_cargo")}</h4>
+            <table className="table table-hover cargo-table">
+              <thead>
+                <tr>
+                  <th>{t("time")}</th>
+                  <th>{t("origin_destination")}</th>
+                  <th>{t("cargo")}</th>
+                  <th>{t("notes")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>18.03.2024 09:00</td>
+                  <td>Zurich → Bern</td>
+                  <td>Post & Bags</td>
+                  <td>Fragile</td>
+                </tr>
+                <tr>
+                  <td>19.03.2024 12:00</td>
+                  <td>Geneva → Sion</td>
+                  <td>Goods on Pallets</td>
+                  <td>Time-critical</td>
+                </tr>
+                <tr>
+                  <td>20.03.2024 08:30</td>
+                  <td>Lugano → Chur</td>
+                  <td>Equipment</td>
+                  <td>Heavy load</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Sidebar */}
+          <div className="col-lg-4">
+            <div className="card mb-4">
+              <div className="card-body">
+                <h5 className="card-title">{t("need_carriers")}</h5>
+                <p className="card-text">{t("carriers_hint")}</p>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/add-cargo">
+                    {t("add_cargo")}
+                  </Link>
+                </li>
               </div>
             </div>
+
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">{t("search")}</h5>
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="region" className="form-label">{t("region")}</label>
+                    <select className="form-select" id="region">
+                      <option>{t("all_regions")}</option>
+                      <option>Zurich</option>
+                      <option>Bern</option>
+                      <option>Geneva</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="cargoType" className="form-label">{t("cargo_type")}</label>
+                    <select className="form-select" id="cargoType">
+                      <option>{t("all_cargo_types")}</option>
+                      <option>Equipment</option>
+                      <option>Documents</option>
+                      <option>Food</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="shipper" className="form-label">{t("shipper")}</label>
+                    <select className="form-select" id="shipper">
+                      <option>{t("all_shippers")}</option>
+                      <option>Company A</option>
+                      <option>Company B</option>
+                    </select>
+                  </div>
+                  <button type="submit" className="btn btn-primary w-100">{t("search")}</button>
+                </form>
+>>>>>>> Stashed changes
+              </div>
+            </div>
+
+           
           </div>
+          {/* Футер */}
+          <footer className="bg-white border-top py-4 mt-5 fixed-bottom">
+            <div className="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
+              <p className="mb-0 text-muted">{t("footer_text")}</p>
+              <div className="footer-links">
+                <Link to="/services">{t("services")}</Link>
+                <Link to="/support">{t("support")}</Link>
+                <Link to="/contacts">{t("contacts")}</Link>
+                <Link to="/faq">{t("faq")}</Link>
+              </div>
+            </div>
+          </footer>
+
         </div>
       </div>
+<<<<<<< Updated upstream
 
       {/* Футер */}
       <footer className="bg-white border-top py-4 mt-5">
@@ -207,6 +397,8 @@ function HomePage() {
           </div>
         </div>
       </footer>
+=======
+>>>>>>> Stashed changes
     </div>
   );
 }

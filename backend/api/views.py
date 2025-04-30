@@ -1,6 +1,7 @@
 import json
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+<<<<<<< Updated upstream
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework import generics, viewsets, status
@@ -8,6 +9,16 @@ from .serializers import ExtendedUserSerializer, UserSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Cargo, EmailVerification, Truck
 from .serializers import CargoSerializer, UserSerializer, TruckSerializer, ProfileSerializer
+=======
+from rest_framework import generics, viewsets
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+
+from .serializers import UserSerializer, CargoSerializer
+from .models import Cargo, EmailVerification
+>>>>>>> Stashed changes
 from .forms import CargoForm
 import random
 from rest_framework.views import APIView
@@ -15,17 +26,22 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import permission_classes
 
+<<<<<<< Updated upstream
 
 import logging
 
 logger = logging.getLogger(__name__)
         
+=======
+# Регистрация с отправкой кода
+>>>>>>> Stashed changes
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ExtendedUserSerializer
     permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
+<<<<<<< Updated upstream
             try:
                 user = serializer.save()
                 code = str(random.randint(100000, 999999))
@@ -65,14 +81,43 @@ class CargoViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
     
+=======
+        user = serializer.save(is_active=False)  # создаём, но не активируем
+        code = str(random.randint(100000, 999999))  # 6-значный код
+
+        # сохраняем код в БД
+        EmailVerification.objects.create(user=user, code=code)
+
+        print(f"[DEBUG] Отправка кода {code} на {user.email} с почты {settings.DEFAULT_FROM_EMAIL}")
+        
+        # отправляем письмо
+        send_mail(
+            subject='Код подтверждения регистрации',
+            message=f'Привет, {user.username}! Ваш код подтверждения: {code}',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+
+        print(f"Код отправлен на {user.email}: {code}")
+
+# CRUD для грузов
+class CargoViewSet(viewsets.ModelViewSet):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
+    permission_classes = [IsAuthenticated]
+
+# Форма добавления груза (HTML)
+>>>>>>> Stashed changes
 def add_cargo_view(request):
     if request.method == 'POST':
         form = CargoForm(request.POST)
         if form.is_valid():
             form.save()  # Створюємо запис у БД
-            return redirect('cargo-success')  # Перенаправляємо, наприклад, на сторінку успіху
+            return redirect('cargo-success')  # Перенаправлення на сторінку успіху
     else:
         form = CargoForm()
+<<<<<<< Updated upstream
     
     return render(request, 'api/add_cargo.html', {'form': form})
 
@@ -100,6 +145,16 @@ class UserProfileAPIView(generics.RetrieveUpdateAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
+=======
+
+    return render(request, 'api/add_cargo.html', {'form': form})
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+>>>>>>> Stashed changes
 class VerifyEmailCodeView(APIView):
     permission_classes = [AllowAny]
 
@@ -117,6 +172,7 @@ class VerifyEmailCodeView(APIView):
             if verification.code == code:
                 user.is_active = True
                 user.save()
+<<<<<<< Updated upstream
                 verification.delete()  # Удаляем код после подтверждения
 
                 # Генерируем JWT токен
@@ -128,6 +184,10 @@ class VerifyEmailCodeView(APIView):
                     'token': str(refresh.access_token),  # Токен отправляется на фронт
                 }, status=200)
 
+=======
+                verification.delete()  # удаляем код после подтверждения
+                return Response({'message': 'Аккаунт успешно подтверждён!'}, status=200)
+>>>>>>> Stashed changes
             else:
                 return Response({'error': 'Неверный код'}, status=400)
 
@@ -135,6 +195,7 @@ class VerifyEmailCodeView(APIView):
             return Response({'error': 'Пользователь не найден'}, status=404)
         except EmailVerification.DoesNotExist:
             return Response({'error': 'Код не найден'}, status=404)
+<<<<<<< Updated upstream
 
 
 class TruckViewSet(viewsets.ModelViewSet):
@@ -197,3 +258,5 @@ def check_documents_approval(request):
     all_approved = all(doc.is_approved for doc in documents)
     return Response({"approved": all_approved, "rejected": False}, status=200)
 
+=======
+>>>>>>> Stashed changes

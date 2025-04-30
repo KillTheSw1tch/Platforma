@@ -166,10 +166,17 @@ body {
     z-index: 10;
     background-color: white;
   }
+<<<<<<< Updated upstream
 
   .cards-wrapper {
     flex: 1;
     margin-left: 20px; /* сдвигаем карточки вправо */
+=======
+  
+  /* Стилі для таблиці з вантажами */ 
+  .cargo-table thead {
+    background-color: #f1f1f1;
+>>>>>>> Stashed changes
   }
 
   .cards-wrapper .card {

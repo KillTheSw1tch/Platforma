@@ -14,7 +14,11 @@
     "all_regions": "Toutes les régions",
     "cargo_type": "Type de cargaison",
     "all_cargo_types": "Tous les types de cargaison",
+<<<<<<< Updated upstream
     "shipper1": "Expéditeur",
+=======
+    "shipper": "Expéditeur",
+>>>>>>> Stashed changes
     "all_shippers": "Tous les expéditeurs",
     "carriers_hint": "Obtenez une liste de transporteurs vérifiés et facilitez votre expédition.",
     "footer_text": "© 2023 Platforma Transportation. La meilleure plateforme de transport en Suisse.",
@@ -134,6 +138,7 @@
     "save": "Enregistrer",
     "close": "Fermer",
     "tarp": "Bâche",
+<<<<<<< Updated upstream
     "extra": "Supplémentaire",
     "loading_city": "Ville de chargement",
     "loading_postal_code": "Code postal de chargement",
@@ -244,10 +249,13 @@
     "chemical_tanker": "Camion-citerne chimique",
     "plastic_tank": "Réservoir en plastique",
     "chip_truck": "Camion à copeaux",
+=======
+>>>>>>> Stashed changes
     "closed": "Fermé",
     "isothermal": "Isotherme",
     "all_metal": "Tout métal",
     "refrigerator": "Réfrigérateur",
+<<<<<<< Updated upstream
     "minimum_weight": "Poids minimum",
     "maximum_weight": "Poids maximum",
     "minimum_volume": "Volume minimum",
@@ -474,6 +482,9 @@
 
     
 
+=======
+    "extra": "Supplémentaire"
+>>>>>>> Stashed changes
 
 
 }

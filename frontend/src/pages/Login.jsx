@@ -5,6 +5,7 @@
   import axios from 'axios';
   import { useNavigate } from 'react-router-dom';
 
+<<<<<<< Updated upstream
   function LoginPage() {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -109,8 +110,65 @@
           </div>
           <button type="submit" className="btn btn-main w-100">{t('login')}</button>
         </form>
+=======
+import { useTranslation } from 'react-i18next';
+
+function LoginPage() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="container py-5">
+      {/* Page Header */}
+      <div className="text-center mb-5">
+        <h1 className="fw-bold">{t('login_title')}</h1>
+        <p className="mb-1">
+          {t('no_account')}{' '}
+          <a href="/registration" style={{ color: 'var(--main-color)', textDecoration: 'none' }}>
+            {t('register')}
+          </a>
+        </p>
+        <div className="heading-line" style={{ borderBottom: '3px solid var(--main-color)', width: '50px', margin: '0.5rem auto 1.5rem' }}></div>
+>>>>>>> Stashed changes
       </div>
     );
   }
 
+<<<<<<< Updated upstream
   export default LoginPage;
+=======
+      {/* Login Form */}
+      <form className="mx-auto" style={{ maxWidth: '500px' }}>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">{t('username_or_email')}</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            placeholder={t('username_placeholder')}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">{t('password')}</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder={t('password_placeholder1')}
+          />
+        </div>
+        <div className="mb-3 form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="rememberMe"
+          />
+          <label className="form-check-label" htmlFor="rememberMe">{t('remember_me')}</label>
+        </div>
+        <button type="submit" className="btn btn-main w-100">{t('login')}</button>
+      </form>
+    </div>
+  );
+}
+
+export default LoginPage;
+>>>>>>> Stashed changes

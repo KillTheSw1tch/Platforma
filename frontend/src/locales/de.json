@@ -14,7 +14,11 @@
     "all_regions": "Alle Regionen",
     "cargo_type": "Frachtart",
     "all_cargo_types": "Alle Frachtarten",
+<<<<<<< Updated upstream
     "shipper1": "Versender",
+=======
+    "shipper": "Versender",
+>>>>>>> Stashed changes
     "all_shippers": "Alle Versender",
     "carriers_hint": "Erhalten Sie eine Liste geprüfter Spediteure und erleichtern Sie Ihren Versand.",
     "footer_text": "© 2023 Platforma Transportation. Die führende Transportplattform in der Schweiz.",
@@ -134,6 +138,7 @@
     "save": "Speichern",
     "close": "Schließen",
     "tarp": "Plane",
+<<<<<<< Updated upstream
     "extra": "Zusätzlich",
     "loading_city": "Ladestadt",
     "loading_postal_code": "Lade-Postleitzahl",
@@ -471,6 +476,13 @@
 
         
 
+=======
+    "closed": "Geschlossen",
+    "isothermal": "Isotherm",
+    "all_metal": "Vollmetall",
+    "refrigerator": "Kühlschrank",
+    "extra": "Zusätzlich"
+>>>>>>> Stashed changes
 
 
 }
