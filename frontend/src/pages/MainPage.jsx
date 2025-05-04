@@ -1,6 +1,11 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from 'react';
 import '../styles/Home.css'; 
+=======
+import React, { useEffect } from 'react';
+import '../styles/Home.css';
+>>>>>>> Stashed changes
 =======
 import React, { useEffect } from 'react';
 import '../styles/Home.css';
@@ -9,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 import axios from 'axios';
 import CargoCard from '../components/CargoCard';
@@ -39,11 +45,19 @@ function HomePage() {
 
   // Используем сохраненный язык при загрузке страницы
 >>>>>>> Stashed changes
+=======
+
+function HomePage() {
+  const { t } = useTranslation();
+
+  // Используем сохраненный язык при загрузке страницы
+>>>>>>> Stashed changes
   useEffect(() => {
     const savedLanguage = localStorage.getItem('i18nextLng');
     if (savedLanguage) {
       i18n.changeLanguage(savedLanguage);
     }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
     axios.get('http://127.0.0.1:8000/api/cargo/')
@@ -72,6 +86,8 @@ function HomePage() {
     <div>
       {/* Верхнее меню */}
 =======
+=======
+>>>>>>> Stashed changes
   }, []);
 
   // Функция изменения языка с сохранением в localStorage
@@ -138,6 +154,7 @@ function HomePage() {
           <ul className="nav nav-pills py-2">
             <li className="nav-item me-3">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               {isLoggedIn ? (
                 <>
                   <Link to="/add-vehicle" className="btn btn-primary me-3">{t("add_vehicle")}</Link>
@@ -150,6 +167,8 @@ function HomePage() {
                 </>
               )}
 =======
+=======
+>>>>>>> Stashed changes
               <a className="nav-link active" href="#">{t("domestic_cargo")}</a>
             </li>
             <li className="nav-item me-3">
@@ -386,6 +405,7 @@ function HomePage() {
         </div>
       </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
       {/* Футер */}
       <footer className="bg-white border-top py-4 mt-5">
@@ -397,6 +417,8 @@ function HomePage() {
           </div>
         </div>
       </footer>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     </div>

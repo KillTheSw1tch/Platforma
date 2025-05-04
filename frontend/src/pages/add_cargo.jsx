@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -155,6 +156,12 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function AddCargoRequest() {
+=======
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+function AddCargoRequest() {
+>>>>>>> Stashed changes
   const { t } = useTranslation();
   const [showSecondLoading, setShowSecondLoading] = useState(false);
   const [showSecondUnloading, setShowSecondUnloading] = useState(false);

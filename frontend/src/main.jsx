@@ -1,5 +1,8 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import './i18n'; // ⬅️ импорт конфигурации i18next
@@ -10,7 +13,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';  // <-- Імпорт стилів
 import 'bootstrap'; // 👈 обязательно!
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 

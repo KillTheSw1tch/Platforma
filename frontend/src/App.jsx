@@ -12,6 +12,7 @@ import LoginPage from './pages/Login';
 import RegistrationPage from './pages/registrationPage';
 import AddCargoPage from './pages/add_cargo';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import UserProfile from './pages/UserProfile';
 import VerifyCode from './pages/VerifyCode';
 import Services from './pages/Services';
@@ -30,10 +31,15 @@ import PendingReview from "./pages/PendingReview";
 
 
 =======
+=======
+>>>>>>> Stashed changes
 import VerifyCode from './pages/VerifyCode'; // 👈 добавили!
 import Services from './pages/Services';
 import Support from './pages/Support';
 import Contacts from './pages/Contacts'; // 👈 Добавили новый импорт
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 
@@ -41,6 +47,7 @@ function App() {
   return (
     <Router>
       <Routes>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
@@ -66,6 +73,8 @@ function App() {
 
         </Route>
 =======
+=======
+>>>>>>> Stashed changes
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
@@ -74,6 +83,9 @@ function App() {
         <Route path="/services" element={<Services />} /> {/* Новый маршрут */}
         <Route path="/support" element={<Support />} /> {/* 👈 Новый маршрут 2 */}
         <Route path="/contacts" element={<Contacts />} /> {/* 👈 Новый маршрут 3 */}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       </Routes>
     </Router>

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 =======
 
 
@@ -15,7 +20,12 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 
 
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
+
 function RegistrationPage() {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -69,6 +79,8 @@ function RegistrationPage() {
     };
     console.log("Payload:", JSON.stringify(payload, null, 2));
 =======
+=======
+>>>>>>> Stashed changes
 
   const { t } = useTranslation();
 
@@ -91,6 +103,9 @@ function RegistrationPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     try {
       const response = await fetch('http://127.0.0.1:8000/api/user/register/', {
@@ -98,6 +113,7 @@ function RegistrationPage() {
         headers: {
           'Content-Type': 'application/json',
         },
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         body: JSON.stringify(payload),
       });
@@ -119,6 +135,8 @@ function RegistrationPage() {
     }
   };
 =======
+=======
+>>>>>>> Stashed changes
         body: JSON.stringify({
           username,
           password,
@@ -141,6 +159,9 @@ function RegistrationPage() {
   };
   
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   return (
@@ -179,6 +200,7 @@ function RegistrationPage() {
           <div className="row g-3">
             <div className="col-md-6">
               <label htmlFor="companyName" className="form-label">{t('company')}</label>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               <input
                 type="text"
@@ -236,6 +258,21 @@ function RegistrationPage() {
               <label htmlFor="postNumber" className="form-label">{t('post_number')}</label>
               <input type="text" className="form-control" id="postNumber" placeholder={t('zip_postcode')} />
 >>>>>>> Stashed changes
+=======
+              <input type="text" className="form-control" id="companyName" placeholder={t('company_name')} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="address" className="form-label">{t('address')}</label>
+              <input type="text" className="form-control" id="address" placeholder={t('street_house_number')} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="district" className="form-label">{t('canton')}</label>
+              <input type="text" className="form-control" id="district" placeholder={t('canton')} />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="postNumber" className="form-label">{t('post_number')}</label>
+              <input type="text" className="form-control" id="postNumber" placeholder={t('zip_postcode')} />
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>
@@ -244,7 +281,11 @@ function RegistrationPage() {
         <div className="section-divider" style={{ margin: '2rem 0' }}>
           <div className="section-title" style={{ color: 'var(--main-color)', fontWeight: 600, fontSize: '1.1rem', marginBottom: '0.5rem' }}>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             {t('personal_details')}
+=======
+          {t('personal_details')}
+>>>>>>> Stashed changes
 =======
           {t('personal_details')}
 >>>>>>> Stashed changes
@@ -253,12 +294,16 @@ function RegistrationPage() {
             <div className="col-md-6">
               <label htmlFor="formOfAddress" className="form-label">{t('form_of_address')}</label>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               <select
                 className="form-select"
                 id="formOfAddress"
                 value={formOfAddress}
                 onChange={(e) => setFormOfAddress(e.target.value)}
               >
+=======
+              <select className="form-select" id="formOfAddress">
+>>>>>>> Stashed changes
 =======
               <select className="form-select" id="formOfAddress">
 >>>>>>> Stashed changes
@@ -274,7 +319,11 @@ function RegistrationPage() {
                 className="form-control"
                 id="firstName"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 placeholder={t('first_name')}
+=======
+                placeholder="First name"
+>>>>>>> Stashed changes
 =======
                 placeholder="First name"
 >>>>>>> Stashed changes
@@ -284,6 +333,7 @@ function RegistrationPage() {
             </div>
             
             <div className="col-md-6">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               <label htmlFor="surname" className="form-label">{t('surname')}</label>
               <input
@@ -295,6 +345,8 @@ function RegistrationPage() {
                 onChange={(e) => setSurname(e.target.value)}
               />
 =======
+=======
+>>>>>>> Stashed changes
               <label htmlFor="password" className="form-label">{t('password')}</label>
               <input
                 type="password"
@@ -314,6 +366,7 @@ function RegistrationPage() {
             
             <div className="col-md-6">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               <label htmlFor="password" className="form-label">{t('password')}</label>
               <input
                 type="password"
@@ -323,6 +376,8 @@ function RegistrationPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
 =======
+=======
+>>>>>>> Stashed changes
               <label htmlFor="email" className="form-label">{t('email')}</label>
               <input
                 type="email"
@@ -331,11 +386,15 @@ function RegistrationPage() {
                 placeholder={t('email_placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
               />
             </div>
             
             <div className="col-md-6">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               <label htmlFor="email" className="form-label">{t('email')}</label>
               <input
@@ -350,9 +409,14 @@ function RegistrationPage() {
               <label htmlFor="telephone" className="form-label">{t('telephone')}</label>
               <input type="tel" className="form-control" id="telephone" placeholder={t('telephone_example')} />
 >>>>>>> Stashed changes
+=======
+              <label htmlFor="telephone" className="form-label">{t('telephone')}</label>
+              <input type="tel" className="form-control" id="telephone" placeholder={t('telephone_example')} />
+>>>>>>> Stashed changes
             </div>
             
             <div className="col-md-6">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               <label htmlFor="telephone" className="form-label">{t('telephone')}</label>
               <input
@@ -367,9 +431,14 @@ function RegistrationPage() {
               <label htmlFor="mobile" className="form-label">{t('mobile')}</label>
               <input type="tel" className="form-control" id="mobile" placeholder={t('mobile_example')} />
 >>>>>>> Stashed changes
+=======
+              <label htmlFor="mobile" className="form-label">{t('mobile')}</label>
+              <input type="tel" className="form-control" id="mobile" placeholder={t('mobile_example')} />
+>>>>>>> Stashed changes
             </div>
             
             <div className="col-md-6">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               <label htmlFor="mobile" className="form-label">{t('mobile')}</label>
               <input
@@ -394,6 +463,10 @@ function RegistrationPage() {
               <label htmlFor="language" className="form-label">{t('preferred_language')}</label>
               <select className="form-select" id="language">
 >>>>>>> Stashed changes
+=======
+              <label htmlFor="language" className="form-label">{t('preferred_language')}</label>
+              <select className="form-select" id="language">
+>>>>>>> Stashed changes
                 <option value="">{t('select_language')}</option>
                 <option value="en">{t('english')}</option>
                 <option value="de">{t('german')}</option>
@@ -403,12 +476,16 @@ function RegistrationPage() {
             <div className="col-md-6">
               <label htmlFor="clientType" className="form-label">{t('client_type')}</label>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               <select
                 className="form-select"
                 id="clientType"
                 value={clientType}
                 onChange={(e) => setClientType(e.target.value)}
               >
+=======
+              <select className="form-select" id="clientType">
+>>>>>>> Stashed changes
 =======
               <select className="form-select" id="clientType">
 >>>>>>> Stashed changes
@@ -425,7 +502,11 @@ function RegistrationPage() {
             <input className="form-check-input" type="checkbox" id="termsCheck" required />
             <label className="form-check-label" htmlFor="termsCheck">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               {t('accept_privacy')}{' '}
+=======
+            {t('accept_privacy')}{' '}
+>>>>>>> Stashed changes
 =======
             {t('accept_privacy')}{' '}
 >>>>>>> Stashed changes
@@ -453,6 +534,9 @@ function RegistrationPage() {
 =======
           <button type="submit" className="btn btn-main px-4 py-2">
           {t('registration')}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
           </button>
         </div>

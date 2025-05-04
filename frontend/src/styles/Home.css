@@ -173,6 +173,25 @@ body {
     margin-left: 20px; /* сдвигаем карточки вправо */
 =======
   
+<<<<<<< Updated upstream
+=======
+  /* Логотип у navbar */
+  .navbar-brand {
+    font-weight: 600;
+  }
+  
+  /* Перевизначення кольору для кнопок .btn-primary */
+  .btn-primary {
+    background-color: #57cc99;
+    border-color: #57cc99;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #4dbd8a;
+    border-color: #4dbd8a;
+  }
+  
+>>>>>>> Stashed changes
   /* Стилі для таблиці з вантажами */ 
   .cargo-table thead {
     background-color: #f1f1f1;

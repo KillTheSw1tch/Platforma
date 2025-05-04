@@ -40,7 +40,11 @@ class Cargo(models.Model):
     def __str__(self):
         return f"{self.loading_city_primary} -> {self.unloading_city_primary}"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -48,6 +52,7 @@ class EmailVerification(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     def __str__(self):
         return f'{self.user.username} - {self.code}'
@@ -111,6 +116,11 @@ class CompanyDocument(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.file.name}"
+=======
+
+    def __str__(self):
+        return f'{self.user.username} - {self.code}'
+>>>>>>> Stashed changes
 =======
 
     def __str__(self):

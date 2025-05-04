@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // VerifyCode.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
@@ -22,16 +23,22 @@ function VerifyCode() {
   const navigate = useNavigate();
   const { updateAuthStatus } = useOutletContext();
 =======
+=======
+>>>>>>> Stashed changes
 import React, { useState } from 'react';
 
 function VerifyCode() {
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     const email = localStorage.getItem('userEmail');
     if (!email) {
@@ -46,13 +53,22 @@ function VerifyCode() {
       const response = await fetch('http://127.0.0.1:8000/api/user/verify/', {
 
 >>>>>>> Stashed changes
+=======
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/user/verify/', {
+
+>>>>>>> Stashed changes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           email: email,
+=======
+          email: localStorage.getItem('userEmail'), // берём email из localStorage
+>>>>>>> Stashed changes
 =======
           email: localStorage.getItem('userEmail'), // берём email из localStorage
 >>>>>>> Stashed changes
@@ -63,6 +79,7 @@ function VerifyCode() {
       const data = await response.json();
 
       if (response.ok) {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         // Сохранение токена после успешного подтверждения
         localStorage.setItem('authToken', data.token);
@@ -75,10 +92,15 @@ function VerifyCode() {
           navigate('/'); // Перенаправляем на главную (будет логгированная страница)
         }, 1000);
 =======
+=======
+>>>>>>> Stashed changes
         setMessage('✅ Код подтвержден. Перенаправление...');
         setTimeout(() => {
           window.location.href = '/'; // редирект на главную
         }, 2000);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       } else {
         setMessage('❌ Неверный код. Попробуйте снова.');
@@ -92,9 +114,15 @@ function VerifyCode() {
   return (
     <div className="container py-5">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <h2>{t("verify_email")}</h2>
       <form onSubmit={handleSubmit}>
         <label>{t("enter_the_code_from_the_email")}:</label>
+=======
+      <h2>Подтверждение Email</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Введите код из письма:</label>
+>>>>>>> Stashed changes
 =======
       <h2>Подтверждение Email</h2>
       <form onSubmit={handleSubmit}>
@@ -107,7 +135,11 @@ function VerifyCode() {
           className="form-control my-2"
         />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <button type="submit" className="btn btn-primary">{t("confirm")}</button>
+=======
+        <button type="submit" className="btn btn-primary">Подтвердить</button>
+>>>>>>> Stashed changes
 =======
         <button type="submit" className="btn btn-primary">Подтвердить</button>
 >>>>>>> Stashed changes

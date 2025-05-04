@@ -15,7 +15,11 @@
     "cargo_type": "Frachtart",
     "all_cargo_types": "Alle Frachtarten",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "shipper1": "Versender",
+=======
+    "shipper": "Versender",
+>>>>>>> Stashed changes
 =======
     "shipper": "Versender",
 >>>>>>> Stashed changes
@@ -138,6 +142,7 @@
     "save": "Speichern",
     "close": "Schließen",
     "tarp": "Plane",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     "extra": "Zusätzlich",
     "loading_city": "Ladestadt",
@@ -477,11 +482,16 @@
         
 
 =======
+=======
+>>>>>>> Stashed changes
     "closed": "Geschlossen",
     "isothermal": "Isotherm",
     "all_metal": "Vollmetall",
     "refrigerator": "Kühlschrank",
     "extra": "Zusätzlich"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 

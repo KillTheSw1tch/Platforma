@@ -9,13 +9,19 @@ export default function Support() {
     const { t } = useTranslation();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     // Обработчик смены языка
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         localStorage.setItem('i18nextLng', lng);
     };
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     // Устанавливаем сохраненный язык при загрузке
     useEffect(() => {
@@ -29,8 +35,11 @@ export default function Support() {
         <div>
             {/* Навигационная панель */}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
 =======
+=======
+>>>>>>> Stashed changes
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
@@ -86,6 +95,9 @@ export default function Support() {
                     </div>
                 </div>
             </nav>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
             {/* Информация поддержки */}

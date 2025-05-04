@@ -15,7 +15,11 @@
     "cargo_type": "Type de cargaison",
     "all_cargo_types": "Tous les types de cargaison",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "shipper1": "Expéditeur",
+=======
+    "shipper": "Expéditeur",
+>>>>>>> Stashed changes
 =======
     "shipper": "Expéditeur",
 >>>>>>> Stashed changes
@@ -139,6 +143,7 @@
     "close": "Fermer",
     "tarp": "Bâche",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "extra": "Supplémentaire",
     "loading_city": "Ville de chargement",
     "loading_postal_code": "Code postal de chargement",
@@ -251,10 +256,13 @@
     "chip_truck": "Camion à copeaux",
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     "closed": "Fermé",
     "isothermal": "Isotherme",
     "all_metal": "Tout métal",
     "refrigerator": "Réfrigérateur",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     "minimum_weight": "Poids minimum",
     "maximum_weight": "Poids maximum",
@@ -482,6 +490,9 @@
 
     
 
+=======
+    "extra": "Supplémentaire"
+>>>>>>> Stashed changes
 =======
     "extra": "Supplémentaire"
 >>>>>>> Stashed changes

@@ -9,13 +9,19 @@ export default function Contacts() {
     const { t } = useTranslation();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     // Обработчик смены языка
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         localStorage.setItem('i18nextLng', lng);
     };
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     // Устанавливаем сохраненный язык при загрузке
     useEffect(() => {
@@ -27,8 +33,11 @@ export default function Contacts() {
 
     return (
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <div>            
 =======
+=======
+>>>>>>> Stashed changes
         <div>
             {/* Навигационная панель */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
@@ -86,6 +95,9 @@ export default function Contacts() {
                     </div>
                 </div>
             </nav>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
             {/* Контактная информация */}
@@ -101,6 +113,7 @@ export default function Contacts() {
                     <div className="contact-info">
                         <h2>{t("contacts")}</h2>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <p>{t("contact_us")}</p>
                         <ul>
                             <li>{t("email")}: info@company.com</li>
@@ -111,10 +124,15 @@ export default function Contacts() {
                         <p>{t("languages_available")}</p>
                         <p>{t("questions_suggestions")}</p>
 =======
+=======
+>>>>>>> Stashed changes
                         <p>{t("email")}: info@company.com</p>
                         <p>{t("phone1")}: +41 22 123 45 67</p>
                         <p>{t("phone2")}: +41 22 765 43 21</p>
                         <p>{t("address")}: 123, Transport Street, Zurich, Switzerland</p>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     </div>
                 </div>
@@ -127,9 +145,15 @@ export default function Contacts() {
                     <div className="footer-links">
                         <Link to="/services">{t("services")}</Link>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         
                         <Link to="/contacts">{t("contacts")}</Link>
                         
+=======
+                        <Link to="/support">{t("support")}</Link>
+                        <Link to="/contacts">{t("contacts")}</Link>
+                        <Link to="/faq">{t("faq")}</Link>
+>>>>>>> Stashed changes
 =======
                         <Link to="/support">{t("support")}</Link>
                         <Link to="/contacts">{t("contacts")}</Link>

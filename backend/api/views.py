@@ -2,6 +2,7 @@ import json
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework import generics, viewsets, status
@@ -12,12 +13,19 @@ from .serializers import CargoSerializer, UserSerializer, TruckSerializer, Profi
 =======
 from rest_framework import generics, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
+=======
+from rest_framework import generics, viewsets
+from rest_framework.permissions import AllowAny, IsAuthenticated
+>>>>>>> Stashed changes
 from django.core.mail import send_mail
 from django.conf import settings
 import random
 
 from .serializers import UserSerializer, CargoSerializer
 from .models import Cargo, EmailVerification
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 from .forms import CargoForm
 import random
@@ -27,11 +35,15 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import permission_classes
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 import logging
 
 logger = logging.getLogger(__name__)
         
+=======
+# Регистрация с отправкой кода
+>>>>>>> Stashed changes
 =======
 # Регистрация с отправкой кода
 >>>>>>> Stashed changes
@@ -41,6 +53,7 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             try:
                 user = serializer.save()
@@ -82,6 +95,8 @@ class CargoViewSet(viewsets.ModelViewSet):
         serializer.save()
     
 =======
+=======
+>>>>>>> Stashed changes
         user = serializer.save(is_active=False)  # создаём, но не активируем
         code = str(random.randint(100000, 999999))  # 6-значный код
 
@@ -108,6 +123,9 @@ class CargoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 # Форма добавления груза (HTML)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 def add_cargo_view(request):
     if request.method == 'POST':
@@ -117,6 +135,7 @@ def add_cargo_view(request):
             return redirect('cargo-success')  # Перенаправлення на сторінку успіху
     else:
         form = CargoForm()
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     
     return render(request, 'api/add_cargo.html', {'form': form})
@@ -146,6 +165,8 @@ class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     
     
 =======
+=======
+>>>>>>> Stashed changes
 
     return render(request, 'api/add_cargo.html', {'form': form})
 
@@ -154,6 +175,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 class VerifyEmailCodeView(APIView):
     permission_classes = [AllowAny]
@@ -173,6 +197,7 @@ class VerifyEmailCodeView(APIView):
                 user.is_active = True
                 user.save()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 verification.delete()  # Удаляем код после подтверждения
 
                 # Генерируем JWT токен
@@ -188,6 +213,10 @@ class VerifyEmailCodeView(APIView):
                 verification.delete()  # удаляем код после подтверждения
                 return Response({'message': 'Аккаунт успешно подтверждён!'}, status=200)
 >>>>>>> Stashed changes
+=======
+                verification.delete()  # удаляем код после подтверждения
+                return Response({'message': 'Аккаунт успешно подтверждён!'}, status=200)
+>>>>>>> Stashed changes
             else:
                 return Response({'error': 'Неверный код'}, status=400)
 
@@ -195,6 +224,7 @@ class VerifyEmailCodeView(APIView):
             return Response({'error': 'Пользователь не найден'}, status=404)
         except EmailVerification.DoesNotExist:
             return Response({'error': 'Код не найден'}, status=404)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
 
@@ -258,5 +288,7 @@ def check_documents_approval(request):
     all_approved = all(doc.is_approved for doc in documents)
     return Response({"approved": all_approved, "rejected": False}, status=200)
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

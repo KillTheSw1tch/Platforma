@@ -9,12 +9,18 @@ export default function Services() {
     const { t } = useTranslation();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     // Обработчик смены языка
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         localStorage.setItem('i18nextLng', lng);
     };
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     // Устанавливаем сохраненный язык при загрузке
@@ -28,7 +34,10 @@ export default function Services() {
     return (
         <div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
             {/* Навигационная панель */}
             <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                 <div className="container">
@@ -86,6 +95,9 @@ export default function Services() {
                 </div>
             </nav>
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             {/* Информация о сервисах */}
             <div className="contact-container">
@@ -99,6 +111,7 @@ export default function Services() {
                     </div>
                     <div className="contact-info">
                         <h2>{t("Our Services")}</h2>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                         <p>{t("welcome_message")}</p>
                         <h3>{t("why_us_title")}</h3>
@@ -120,6 +133,8 @@ export default function Services() {
                             <p>{t("registration_info")}</p>
                         </span>
 =======
+=======
+>>>>>>> Stashed changes
                         <p>{t("Our platform acts as a mediator between companies that need transportation and those that provide carrier services. We make the process of finding and organizing freight transportation simple and efficient.")}</p>
                         <h3>{t("Cargo Transportation")}</h3>
                         <p>{t("Connecting businesses with trusted carriers for reliable and efficient cargo transportation.")}</p>
@@ -129,6 +144,9 @@ export default function Services() {
                         <p>{t("Offering logistic management and support to optimize your supply chain.")}</p>
                         <h3>{t("Customer Support")}</h3>
                         <p>{t("Assisting you throughout the transportation process, from booking to delivery.")}</p>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     </div>
                 </div>
@@ -141,9 +159,15 @@ export default function Services() {
                     <div className="footer-links">
                         <Link to="/services">{t("services")}</Link>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         
                         <Link to="/contacts">{t("contacts")}</Link>
                         
+=======
+                        <Link to="/support">{t("support")}</Link>
+                        <Link to="/contacts">{t("contacts")}</Link>
+                        <Link to="/faq">{t("faq")}</Link>
+>>>>>>> Stashed changes
 =======
                         <Link to="/support">{t("support")}</Link>
                         <Link to="/contacts">{t("contacts")}</Link>

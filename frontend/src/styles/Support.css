@@ -3,7 +3,11 @@ body, html {
     padding: 0;
     height: 100%;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     overflow: auto
+=======
+    overflow: hidden;
+>>>>>>> Stashed changes
 =======
     overflow: hidden;
 >>>>>>> Stashed changes

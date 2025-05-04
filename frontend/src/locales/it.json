@@ -15,7 +15,11 @@
     "cargo_type": "Tipo di carico",
     "all_cargo_types": "Tutti i tipi di carico",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "shipper1": "Mittente",
+=======
+    "shipper": "Mittente",
+>>>>>>> Stashed changes
 =======
     "shipper": "Mittente",
 >>>>>>> Stashed changes
@@ -139,6 +143,7 @@
     "close": "Chiudi",
     "tarp": "Telo",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "extra": "Extra",
     "loading_city": "Città di carico",
     "loading_postal_code": "Codice postale di carico",
@@ -251,10 +256,13 @@
     "chip_truck": "Camion per trucioli",
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     "closed": "Chiuso",
     "isothermal": "Isotermico",
     "all_metal": "Tutto metallo",
     "refrigerator": "Frigorifero",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     "minimum_weight": "Peso minimo",
     "maximum_weight": "Peso massimo",
@@ -477,6 +485,9 @@
 
     
 
+=======
+    "extra": "Extra"
+>>>>>>> Stashed changes
 =======
     "extra": "Extra"
 >>>>>>> Stashed changes

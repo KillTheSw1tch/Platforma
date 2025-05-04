@@ -15,6 +15,10 @@
     "cargo_type": "Cargo Type",
     "all_cargo_types": "All cargo types",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    "shipper": "Shipper",
+>>>>>>> Stashed changes
 =======
     "shipper": "Shipper",
 >>>>>>> Stashed changes
@@ -41,7 +45,10 @@
     "mr": "Mr.",
     "ms": "Ms.",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     "first_name": "First Name",
@@ -92,7 +99,10 @@
     "cargo_type1": "Cargo Type",
     "weight_tons": "Weight (tons)",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "weight": "Weight",
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     "volume_m3": "Volume (m³)",
@@ -117,8 +127,11 @@
     "contact_information": "Contact Information",
     "viber_whatsapp": "Viber / WhatsApp",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "whatsapp": "WhatsApp",
     "viber": "Viber",
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     "add": "Add",
@@ -150,6 +163,7 @@
     "save": "Save",
     "close": "Close",
     "tarp": "Tarp",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     "extra": "Extra",
     "add_vehicle": "Add Vehicle",
@@ -265,10 +279,13 @@
     "chip_truck": "Chip Truck",
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     "closed": "Closed",
     "isothermal": "Isothermal",
     "all_metal": "All-Metal",
     "refrigerator": "Refrigerator",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     "minimum_weight": "Minimum weight",
     "maximum_weight": "Maximum weight",
@@ -495,10 +512,15 @@
         
 
 =======
+=======
+>>>>>>> Stashed changes
     "extra": "Extra"
 
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     
 }
